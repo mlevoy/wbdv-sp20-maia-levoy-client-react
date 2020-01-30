@@ -1,13 +1,13 @@
 import React from "react";
-import CourseTableRow from "./CourseTableRow";
+import CourseTableRowComponent from "./CourseTableRowComponent";
 
-const CourseTable = ({courses, deleteCourse}) =>
+const CourseTableComponent = ({courses, deleteCourse}) =>
     <div>
         <h2>Course Table {courses.length}</h2>
         <ul>
             {
                 courses.map(function(course, index) {
-                    return <CourseTableRow
+                    return <CourseTableRowComponent
                         deleteCourse={deleteCourse}
                         key={course._id}
                         course={course}/>
@@ -15,4 +15,4 @@ const CourseTable = ({courses, deleteCourse}) =>
             }
         </ul>
     </div>
-export default CourseTable
+export default CourseTableComponent

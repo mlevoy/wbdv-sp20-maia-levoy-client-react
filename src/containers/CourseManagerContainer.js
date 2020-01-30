@@ -1,9 +1,9 @@
 import React from "react";
-import CourseManagerHeading from "./CourseManagerHeading";
-import CourseTable from "./CourseTable";
-import CourseGrid from "./CourseGrid";
+import CourseManagerHeadingComponent from "../components/CourseManagerHeadingComponent";
+import CourseTableComponent from "../components/CourseTableComponent";
+import CourseGridComponent from "../components/CourseGridComponent";
 
-class CourseManager extends React.Component {
+class CourseManagerContainer extends React.Component {
     state = {
         layout: 'table',
         courses: [
@@ -40,13 +40,13 @@ class CourseManager extends React.Component {
         return(
             <div>
                 <h1>Course Manager</h1>
-                <CourseManagerHeading/>
+                <CourseManagerHeadingComponent/>
                 <button onClick={this.toggle}>Toggle</button>
-                {this.state.layout === 'table' && <CourseTable deleteCourse={this.deleteCourse} courses={this.state.courses}/>}
-                {this.state.layout === 'grid' && <CourseGrid courses={this.state.courses}/>}
+                {this.state.layout === 'table' && <CourseTableComponent deleteCourse={this.deleteCourse} courses={this.state.courses}/>}
+                {this.state.layout === 'grid' && <CourseGridComponent courses={this.state.courses}/>}
             </div>
         )
     }
 }
 
-export default CourseManager
+export default CourseManagerContainer
