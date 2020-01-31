@@ -7,11 +7,11 @@ class CourseManagerContainer extends React.Component {
     state = {
         layout: 'table',
         courses: [
-            {_id: '123', title: 'Course A'},
-            {_id: '234', title: 'Course B'},
-            {_id: '345', title: 'Course C'},
-            {_id: '567', title: 'Course D'},
-            {_id: '456', title: 'Course E'}
+            {_id: '123', title: 'Course A', owned_by: 'me', last_modified: "6:45 PM"},
+            {_id: '234', title: 'Course B', owned_by: 'me', last_modified: "6:45 PM"},
+            {_id: '345', title: 'Course C', owned_by: 'me', last_modified: "6:45 PM"},
+            {_id: '567', title: 'Course D', owned_by: 'me', last_modified: "6:45 PM"},
+            {_id: '456', title: 'Course E', owned_by: 'me', last_modified: "6:45 PM"}
         ]
     }
 
@@ -22,7 +22,6 @@ class CourseManagerContainer extends React.Component {
     }
 
     toggle = () => {
-        console.log('toggle')
         this.setState((prevState) => {
             if(prevState.layout === 'grid') {
                 return {
@@ -39,11 +38,9 @@ class CourseManagerContainer extends React.Component {
     render() {
         return(
             <div>
-                <h1>Course Manager</h1>
                 <CourseManagerHeadingComponent/>
-                <button onClick={this.toggle}>Toggle</button>
-                {this.state.layout === 'table' && <CourseTableComponent deleteCourse={this.deleteCourse} courses={this.state.courses}/>}
-                {this.state.layout === 'grid' && <CourseGridComponent courses={this.state.courses}/>}
+                {this.state.layout === 'table' && <CourseTableComponent deleteCourse={this.deleteCourse} toggle={this.toggle} courses={this.state.courses}/>}
+                {this.state.layout === 'grid' && <CourseGridComponent toggle={this.toggle} courses={this.state.courses}/>}
             </div>
         )
     }
