@@ -2,7 +2,7 @@ import React from "react";
 import CourseManagerHeadingComponent from "../components/CourseManagerHeadingComponent";
 import CourseTableComponent from "../components/CourseTableComponent";
 import CourseGridComponent from "../components/CourseGridComponent";
-import CourseEditor from "../components/CourseEditorComponent";
+import CourseEditor from "../components/courseEditor/CourseEditorComponent";
 import {deleteCourse, createCourse, findAllCourses} from "../services/CourseService"
 
 
@@ -102,13 +102,15 @@ class CourseManagerContainer extends React.Component {
                     <CourseManagerHeadingComponent updateForm={this.updateForm}
                                                    addCourse={this.addCourse}
                                                    newValue={this.state.newCourseTitle}/>
-                    {this.state.layout === 'table' && <CourseTableComponent showCourseEditor={this.showCourseEditor}
-                                          deleteCourse={this.deleteCourse}
-                                          toggle={this.toggle}
-                                          courses={this.state.courses}/>}
-                    {this.state.layout === 'grid' && <CourseGridComponent showCourseEditor={this.showCourseEditor}
-                                         toggle={this.toggle}
-                                         courses={this.state.courses}/>}
+                    {this.state.layout === 'table' && <CourseTableComponent
+                        showCourseEditor={this.showCourseEditor}
+                        deleteCourse={this.deleteCourse}
+                        toggle={this.toggle}
+                        courses={this.state.courses}/>}
+                    {this.state.layout === 'grid' && <CourseGridComponent
+                        showCourseEditor={this.showCourseEditor}
+                        toggle={this.toggle}
+                        courses={this.state.courses}/>}
                 </div>
                 }
             </div>

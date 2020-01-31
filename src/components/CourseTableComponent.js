@@ -1,6 +1,6 @@
 import React from "react";
 import CourseTableRowComponent from "./CourseTableRowComponent";
-const CourseTableComponent = ({courses, deleteCourse, toggle}) =>
+const CourseTableComponent = ({courses, deleteCourse, toggle, showCourseEditor}) =>
     <div className = "container border" >
         <table className="table">
             <thead>
@@ -27,6 +27,7 @@ const CourseTableComponent = ({courses, deleteCourse, toggle}) =>
             {
                 courses.map(function(course, index) {
                     return <CourseTableRowComponent
+                        showCourseEditor={showCourseEditor}
                         deleteCourse={deleteCourse}
                         key={course._id}
                         course={course}/>
