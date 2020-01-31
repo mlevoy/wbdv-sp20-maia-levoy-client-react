@@ -41,4 +41,5 @@ const CourseTableComponent = ({courses, deleteCourse, toggle}) =>
             <i class="fas fa-stack-1x fa-plus fa-inverse"></i>
         </a>
     </div>
+
 export default CourseTableComponent
