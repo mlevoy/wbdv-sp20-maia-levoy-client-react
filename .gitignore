@@ -103,6 +103,7 @@ dist
 .tern-port
 
 .DS_STORE
+node_modules
 scripts/flow/*/.flowconfig
 *~
 *.pyc
