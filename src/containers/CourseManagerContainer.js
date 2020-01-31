@@ -2,23 +2,39 @@ import React from "react";
 import CourseManagerHeadingComponent from "../components/CourseManagerHeadingComponent";
 import CourseTableComponent from "../components/CourseTableComponent";
 import CourseGridComponent from "../components/CourseGridComponent";
+import CourseEditor from "../components/CourseEditorComponent";
+import {deleteCourse, createCourse, findAllCourses} from "../services/CourseService"
+
 
 class CourseManagerContainer extends React.Component {
     state = {
         layout: 'table',
-        courses: [
-            {_id: '123', title: 'Course A', owned_by: 'me', last_modified: "6:45 PM"},
-            {_id: '234', title: 'Course B', owned_by: 'me', last_modified: "6:45 PM"},
-            {_id: '345', title: 'Course C', owned_by: 'me', last_modified: "6:45 PM"},
-            {_id: '567', title: 'Course D', owned_by: 'me', last_modified: "6:45 PM"},
-            {_id: '456', title: 'Course E', owned_by: 'me', last_modified: "6:45 PM"}
-        ]
+        editingCourse: false,
+        newCourseTitle: '',
+        courses: []
     }
 
-    deleteCourse = (deletedCourse) => {
-        this.setState(prevState => ({
-            courses: prevState.courses.filter(course => course._id !== deletedCourse._id)
-        }))
+    componentDidMount = async () => {
+        //new method using await
+        const allCourses = await findAllCourses()
+        this.setState({
+            courses: allCourses
+        })
+
+        //original using .then
+        // findAllCourses()
+        //     .then(courses => this.setState({
+        //         courses: courses
+        //     }))
+    }
+
+
+    deleteCourse = async (deletedCourse) => {
+        const status = await deleteCourse(deletedCourse._id)
+        const courses = await findAllCourses()
+        this.setState({
+            courses: courses
+        })
     }
 
     toggle = () => {
@@ -35,12 +51,66 @@ class CourseManagerContainer extends React.Component {
         })
     }
 
+    showCourseEditor = () =>
+        this.setState({
+            editingCourse: true
+        })
+
+    hideCourseEditor = () =>
+        this.setState({
+            editingCourse: false
+        })
+
+    addCourse = async () =>
+    {
+        const newCourse = {
+            title: this.state.newCourseTitle
+        }
+        const actualCourse = await createCourse(newCourse)
+        const allCourses = await findAllCourses()
+        this.setState({
+            courses: allCourses
+        })
+        //example without server request
+        // this.setState(prevState => ({
+        //     courses: [
+        //         ...prevState.courses,
+        //         {
+        //             _id: (new Date()).getTime() + "",
+        //             title: prevState.newCourseTitle
+        //         }
+        //     ]
+        // }))
+    }
+
+    updateForm = (e) => {
+        this.setState({
+            newCourseTitle: e.target.value
+        })
+    }
+
     render() {
         return(
+
             <div>
-                <CourseManagerHeadingComponent/>
-                {this.state.layout === 'table' && <CourseTableComponent deleteCourse={this.deleteCourse} toggle={this.toggle} courses={this.state.courses}/>}
-                {this.state.layout === 'grid' && <CourseGridComponent toggle={this.toggle} courses={this.state.courses}/>}
+                {
+                    this.state.editingCourse
+                    && <CourseEditor hideCourseEditor={this.hideCourseEditor}/>
+                }
+                {!this.state.editingCourse &&
+                <div>
+                    <CourseManagerHeadingComponent updateForm={this.updateForm}
+                                                   addCourse={this.addCourse}
+                                                   newValue={this.state.newCourseTitle}/>
+                    {this.state.layout === 'table' && <CourseTableComponent showCourseEditor={this.showCourseEditor}
+                                          deleteCourse={this.deleteCourse}
+                                          toggle={this.toggle}
+                                          courses={this.state.courses}/>}
+                    {this.state.layout === 'grid' && <CourseGridComponent showCourseEditor={this.showCourseEditor}
+                                         toggle={this.toggle}
+                                         courses={this.state.courses}/>}
+                </div>
+                }
             </div>
         )
     }

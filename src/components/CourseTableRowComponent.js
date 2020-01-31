@@ -11,8 +11,8 @@ const CourseTableRowComponent = ({course, deleteCourse}) =>
                 </span>
         </td>
         {/*TODO owner and modified date dynamic*/}
-        <td className="col d-none d-md-table-cell wbdv-row wbdv-owner">{course.owned_by}</td>
-        <td className="col d-none d-lg-table-cell wbdv-row wbdv-modified-date">{course.last_modified}</td>
+        <td className="col d-none d-md-table-cell wbdv-row wbdv-owner">me</td>
+        <td className="col d-none d-lg-table-cell wbdv-row wbdv-modified-date">6:45 PM</td>
         <td className="col-2">
             <button onClick={() => deleteCourse(course)} type="button" className="btn pt-0 wbdv-row wbdv-button wbdv-delete"><i className="fas fa-times"></i>
             </button>

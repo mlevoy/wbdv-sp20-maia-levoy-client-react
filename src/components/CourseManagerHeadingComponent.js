@@ -1,5 +1,5 @@
 import React from "react";
-const CourseManagerHeadingComponent = () =>
+const CourseManagerHeadingComponent = ({updateForm, addCourse, newValue}) =>
       <nav className="navbar d-flex justify-content-start navbar-dark sticky-top bg-primary">
         <button type="button" className="btn text-white fa-1x wbdv-field wbdv-hamburger"
                 data-toggle="collapse"
@@ -24,8 +24,10 @@ const CourseManagerHeadingComponent = () =>
             <input className="form-control col-8 col-sm-9 mr-2 wbdv-field wbdv-new-course"
                 type="text"
                 id="addCourseFld"
-                placeholder="New Course Title"/>
-                <a className="fa-1x fa-stack wbdv-button wbdv-add-course" href="#">
+                placeholder="New Course Title"
+                onChange={updateForm}
+                value={newValue}/>
+                <a className="fa-1x fa-stack wbdv-button wbdv-add-course" href="#" onClick={addCourse}>
                     <i className="fas fa-stack-2x fa-circle text-danger"></i>
                     <i className="fas fa-stack-1x fa-plus fa-inverse"></i>
                 </a>
