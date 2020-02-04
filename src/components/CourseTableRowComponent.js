@@ -1,19 +1,29 @@
 import React from "react";
 import {updateCourse} from "../services/CourseService";
-
 class CourseTableRowComponent extends React.Component {
     constructor(props) {
         super(props);
     }
-
     state = {
+        selected: false,
         editing: false,
         course: this.props.course
     }
 
+    courseSelected = () =>
+        this.setState({
+            selected: true
+        })
+
+     courseUnselected = () =>
+        this.setState({
+            selected: false
+        })
+
+
     render() {
         return (
-            <tr className="row wbdv-row wbdv-course">
+            <tr className="row wbdv-row wbdv-course" onClick={this.courseSelected}>
                 <td className="col-10 col-md-8 col-lg-6">
                 <span className="d-flex">
                      <a onClick={this.props.showCourseEditor}>
@@ -36,20 +46,23 @@ class CourseTableRowComponent extends React.Component {
                     }
                 </span>
                 </td>
-                {/*TODO owner and modified date dynamic*/}
                 <td className="col d-none d-md-table-cell wbdv-row wbdv-owner">me</td>
                 <td className="col d-none d-lg-table-cell wbdv-row wbdv-modified-date">6:45 PM</td>
                 <td className="col-2">
-                    <button onClick={() => this.props.deleteCourse(this.state.course)} type="button"
-                            className="btn pt-0 wbdv-row wbdv-button wbdv-delete"><i className="fas fa-times"></i>
-                    </button>
-                    <button onClick={() => this.setState({editing: true})}>Edit</button>
-                    <button onClick={(e) => {
+                    {this.state.selected && !this.state.editing &&
+                    <i className="btn fas fa-pencil-alt wbdv-edit" onClick={() => this.setState({editing: true})}/>
+                    }
+                    {this.state.selected && !this.state.editing &&
+                    <i className="btn wbdv-row wbdv-button wbdv-delete fa fa-trash" onClick={() => this.props.deleteCourse(this.state.course)}/>}
+                    {this.state.selected && this.state.editing &&
+                    <i className="btn fas fa-check" onClick={(e) => {
                         updateCourse(this.state.course._id, this.state.course).then(status => {})
                         this.setState({
-                            editing: false
-                        })
-                    }}>Save</button>
+                            editing: false,
+                            // selected: false NOT WORKING
+                            })
+                        }
+                    }/>}
                 </td>
             </tr>)
     }

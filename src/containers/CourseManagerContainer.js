@@ -69,7 +69,8 @@ class CourseManagerContainer extends React.Component {
         const actualCourse = await createCourse(newCourse)
         const allCourses = await findAllCourses()
         this.setState({
-            courses: allCourses
+            courses: allCourses,
+            newCourseTitle: ''
         })
         //example without server request
         // this.setState(prevState => ({

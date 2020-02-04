@@ -1,4 +1,5 @@
 import React from "react";
+import './course-list.style.client.css';
 import CourseTableRowComponent from "./CourseTableRowComponent";
 const CourseTableComponent = ({courses, deleteCourse, toggle, showCourseEditor}) =>
     <div className = "container border" >
@@ -15,10 +16,10 @@ const CourseTableComponent = ({courses, deleteCourse, toggle, showCourseEditor})
                 <th className="col d-none d-lg-table-cell wbdv-header wbdv-last-modified">Last modified by me</th>
                 <th className="col d-none d-lg-table-cell">
                     <button onClick={toggle} className="btn wbdv-button wbdv-grid-layout">
-                        <i className="fas fa-grip-horizontal"></i>
+                        <i className="fas fa-grip-horizontal"/>
                     </button>
                     <button type="button" className="btn wbdv-header wbdv-sort">
-                        <i className="fas fa-sort-alpha-down"></i>
+                        <i className="fas fa-sort-alpha-down"/>
                     </button>
                 </th>
             </tr>
@@ -38,8 +39,8 @@ const CourseTableComponent = ({courses, deleteCourse, toggle, showCourseEditor})
             </tfoot>
         </table>
         <a className="fa-2x fa-stack cl-bottom-right" href="#">
-            <i className="fas fa-stack-2x fa-circle text-danger"></i>
-            <i className="fas fa-stack-1x fa-plus fa-inverse"></i>
+            <i className="fas fa-stack-2x fa-circle text-danger"/>
+            <i className="fas fa-stack-1x fa-plus fa-inverse"/>
         </a>
     </div>
 
