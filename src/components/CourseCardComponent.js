@@ -38,7 +38,8 @@ class CourseCardComponent extends React.Component {
                             value={this.state.course.title}/>
                     }
                 <div className="card-text wbdv-owner">Owned by me</div>
-                <div className="card-text wbdv-modified-date">Modified 6:45 PM</div>
+                <div className="card-text wbdv-modified-date">
+                    Modified {new Date(this.state.course.date).toLocaleTimeString().replace(/:\d+ /, ' ')}</div>
                     {!this.state.editing &&
                     <i className="btn fas fa-pencil-alt wbdv-edit" onClick={() => this.setState({editing: true})}/>
                     }
@@ -46,6 +47,12 @@ class CourseCardComponent extends React.Component {
                     <i className="btn wbdv-row wbdv-button wbdv-delete fa fa-trash" onClick={() => this.props.deleteCourse(this.state.course)}/>}
                     {this.state.editing &&
                     <i className="btn fas fa-check" onClick={(e) => {
+                        this.setState({
+                            course: {
+                                ...this.state.course,
+                                date: new Date()
+                            }
+                        })
                         updateCourse(this.state.course._id, this.state.course).then(status => {})
                         this.setState({
                             editing: false,

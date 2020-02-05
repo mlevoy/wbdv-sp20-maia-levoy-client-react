@@ -11,6 +11,7 @@ class CourseManagerContainer extends React.Component {
         layout: 'table',
         editingCourse: false,
         newCourseTitle: '',
+        newDate: '',
         courses: []
     }
 
@@ -82,13 +83,15 @@ class CourseManagerContainer extends React.Component {
     addCourse = async () =>
     {
         const newCourse = {
-            title: this.state.newCourseTitle
+            title: this.state.newCourseTitle,
+            date: new Date()
         }
         const actualCourse = await createCourse(newCourse)
         const allCourses = await findAllCourses()
         this.setState({
             courses: allCourses,
-            newCourseTitle: ''
+            newCourseTitle: '',
+            date: ''
         })
         //example without server request
         // this.setState(prevState => ({
@@ -124,13 +127,15 @@ class CourseManagerContainer extends React.Component {
                         showCourseEditor={this.showCourseEditor}
                         deleteCourse={this.deleteCourse}
                         toggle={this.toggle}
-                        courses={this.state.courses}/>}
+                        courses={this.state.courses}
+                    />}
                         {/*courseSelected={this.courseSelected}/>}*/}
                     {this.state.layout === 'grid' && <CourseGridComponent
                         showCourseEditor={this.showCourseEditor}
                         toggle={this.toggle}
                         courses={this.state.courses}
-                        deleteCourse={this.deleteCourse}/>}
+                        deleteCourse={this.deleteCourse}
+                        />}
                 </div>
                 }
             </div>

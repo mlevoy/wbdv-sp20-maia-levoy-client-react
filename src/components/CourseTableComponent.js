@@ -5,7 +5,7 @@ const CourseTableComponent = ({courses, deleteCourse, toggle, showCourseEditor})
         <table className="table">
             <thead>
             <tr className="row">
-                <th className="col-12 col-md-8 col-lg-6 wbdv-header wbdv-title">Title</th>
+                <th className="col-8 col-sm-9 col-md-8 col-lg-5 wbdv-header wbdv-title">Title</th>
                 <th className="d-none d-md-table-cell col dropdown-toggle wbdv-header wbdv-owner"
                     data-toggle="dropdown">Owned by
                     <div className="dropdown-menu">
@@ -13,7 +13,7 @@ const CourseTableComponent = ({courses, deleteCourse, toggle, showCourseEditor})
                     </div>
                 </th>
                 <th className="col d-none d-lg-table-cell wbdv-header wbdv-last-modified">Last modified by me</th>
-                <th className="col d-none d-lg-table-cell">
+                <th className="col d-lg-table-cell col-md-2">
                     <button onClick={toggle} className="btn wbdv-button wbdv-grid-layout">
                         <i className="fas fa-grip-horizontal"/>
                     </button>
