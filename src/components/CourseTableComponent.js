@@ -32,16 +32,13 @@ const CourseTableComponent = ({courses, deleteCourse, toggle, showCourseEditor})
                         deleteCourse={deleteCourse}
                         key={course._id}
                         course={course}/>
+                        // courseSelected = {courseSelected}/>
                 })
             }
             </tbody>
             <tfoot>
             </tfoot>
         </table>
-        <a className="fa-2x fa-stack cl-bottom-right" href="#">
-            <i className="fas fa-stack-2x fa-circle text-danger"/>
-            <i className="fas fa-stack-1x fa-plus fa-inverse"/>
-        </a>
     </div>
 
 export default CourseTableComponent

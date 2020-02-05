@@ -4,9 +4,11 @@ import CourseTableComponent from "../components/CourseTableComponent";
 import CourseGridComponent from "../components/CourseGridComponent";
 import CourseEditor from "../components/courseEditor/CourseEditorComponent";
 import {deleteCourse, createCourse, findAllCourses} from "../services/CourseService"
+import CourseTableRowComponent from "../components/CourseTableRowComponent";
 
 
 class CourseManagerContainer extends React.Component {
+
     state = {
         layout: 'table',
         editingCourse: false,
@@ -61,6 +63,20 @@ class CourseManagerContainer extends React.Component {
             editingCourse: false
         })
 
+    // courseSelected = (e) =>
+    //     e.target.
+    // setState((prevState) => {
+    //         if(prevState.selected === false) {
+    //             return {
+    //                 selected: true
+    //             }
+    //         } else {
+    //             return {
+    //                 selected: false
+    //             }
+    //         }
+    //     })
+
     addCourse = async () =>
     {
         const newCourse = {
@@ -108,10 +124,12 @@ class CourseManagerContainer extends React.Component {
                         deleteCourse={this.deleteCourse}
                         toggle={this.toggle}
                         courses={this.state.courses}/>}
+                        {/*courseSelected={this.courseSelected}/>}*/}
                     {this.state.layout === 'grid' && <CourseGridComponent
                         showCourseEditor={this.showCourseEditor}
                         toggle={this.toggle}
-                        courses={this.state.courses}/>}
+                        courses={this.state.courses}
+                        deleteCourse={this.deleteCourse}/>}
                 </div>
                 }
             </div>
