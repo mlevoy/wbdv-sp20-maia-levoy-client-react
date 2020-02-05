@@ -37,7 +37,11 @@ class CourseManagerContainer extends React.Component {
         })
     }
 
-    toggle = () => {
+    toggle = async () => {
+        const allCourses = await findAllCourses()
+        this.setState({
+            courses: allCourses,
+        })
         this.setState((prevState) => {
             if(prevState.layout === 'grid') {
                 return {
@@ -106,7 +110,6 @@ class CourseManagerContainer extends React.Component {
 
     render() {
         return(
-
             <div>
                 {
                     this.state.editingCourse
