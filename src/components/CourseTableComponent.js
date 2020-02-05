@@ -1,5 +1,4 @@
 import React from "react";
-import './course-list.style.client.css';
 import CourseTableRowComponent from "./CourseTableRowComponent";
 const CourseTableComponent = ({courses, deleteCourse, toggle, showCourseEditor}) =>
     <div className = "container border" >

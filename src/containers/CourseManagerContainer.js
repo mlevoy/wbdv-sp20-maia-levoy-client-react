@@ -4,8 +4,6 @@ import CourseTableComponent from "../components/CourseTableComponent";
 import CourseGridComponent from "../components/CourseGridComponent";
 import CourseEditor from "../components/courseEditor/CourseEditorComponent";
 import {deleteCourse, createCourse, findAllCourses} from "../services/CourseService"
-import CourseTableRowComponent from "../components/CourseTableRowComponent";
-
 
 class CourseManagerContainer extends React.Component {
 

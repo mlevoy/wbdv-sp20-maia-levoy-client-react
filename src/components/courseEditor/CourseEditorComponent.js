@@ -31,11 +31,14 @@ const CourseEditorComponent = ({hideCourseEditor}) =>
                 </ul>
             </div>
         </div>
+        <div className="row">
+            <div className="col-sm-4 bg-light">
         <ModuleList modules={[
             {_id: "123", title: "CSS"},
             {_id: "234", title: "HTML"},
             {_id: "345", title: "React JS"},
         ]}/>
+            </div>
         <div className="col-sm-8 bg-white">
             <TopicList modules={[
                 {_id: "878", title: "topic 1"},
@@ -45,6 +48,9 @@ const CourseEditorComponent = ({hideCourseEditor}) =>
             <div className="container-fluid border my-2 p-3">
                 <WidgetForm/>
             </div>
+            <button className="btn nav-link bg-danger text-white mx-2 float-right wbdv-add-widget" href="#">+</button>
+
+        </div>
         </div>
     </div>
 

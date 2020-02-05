@@ -1,6 +1,5 @@
 import React from "react";
 import CourseCardComponent from "./CourseCardComponent";
-
 const CourseGridComponent = (attributes) =>
     <div className="container-fluid">
         <button onClick={attributes.toggle} type="button" className="btn wbdv-button wbdv-list-layout">
