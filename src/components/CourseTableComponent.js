@@ -32,7 +32,6 @@ const CourseTableComponent = ({courses, deleteCourse, toggle, showCourseEditor})
                         deleteCourse={deleteCourse}
                         key={course._id}
                         course={course}/>
-                        // courseSelected = {courseSelected}/>
                 })
             }
             </tbody>

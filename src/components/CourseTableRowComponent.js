@@ -19,15 +19,15 @@ class CourseTableRowComponent extends React.Component {
 
     render() {
         return (
-            <tr className={"row wbdv-row wbdv-course " + (this.state.selected? 'bg-primary' : 'bg-none')}
+            <tr className={"row wbdv-row wbdv-course " + (this.state.selected? 'bg-primary text-light' : 'text-dark bg-none')}
                 onClick={(event => this.courseSelected(event))}>
                 <td className="col-9 col-md-8 col-lg-6">
                 <span className="d-flex">
                      <a onClick={this.props.showCourseEditor}>
-                        <i className="fas fa-file-alt text-primary mx-2 wbdv-row wbdv-icon"/>
+                        <i className={"fas fa-file-alt mx-2 wbdv-row wbdv-icon " + (this.state.selected? 'text-light' : 'text-primary')}/>
                     </a>
                     {!this.state.editing &&
-                    <a className="text-dark wbdv-row wbdv-title text-truncate" href="#"
+                    <a className={"wbdv-row wbdv-title text-truncate  " + (this.state.selected? 'text-light' : 'text-dark')} href="#"
                        onClick={this.props.showCourseEditor}>{this.state.course.title}</a>
                     }
                     {
@@ -47,16 +47,19 @@ class CourseTableRowComponent extends React.Component {
                 <td className="col d-none d-lg-table-cell wbdv-row wbdv-modified-date">6:45 PM</td>
                 <td className="col-md-2 col-3">
                     {this.state.selected && !this.state.editing &&
-                    <i className="btn d-inline fas fa-pencil-alt wbdv-edit" onClick={() => this.setState({editing: true})}/>
+                    <i className="btn d-inline fas fa-pencil-alt wbdv-edit text-light" onClick={() => this.setState({editing: true})}/>
                     }
+
                     {this.state.selected && !this.state.editing &&
-                    <i className="btn d-inline wbdv-row wbdv-button wbdv-delete fa fa-trash" onClick={() => this.props.deleteCourse(this.state.course)}/>}
+                    <i className="btn d-inline wbdv-row wbdv-button wbdv-delete fa fa-trash text-light"
+                       onClick={() => this.props.deleteCourse(this.state.course)}/>}
+
                     {this.state.selected && this.state.editing &&
-                    <i className="btn fas fa-check" ref={this.save} onClick={(e) => {
+                    <i className="btn fas fa-check text-light" ref={this.save}
+                       onClick={(e) => {
                         updateCourse(this.state.course._id, this.state.course).then(status => {})
                         this.setState({
-                            editing: false
-                            })
+                            editing: false})
                         }
                     }/>}
                 </td>
