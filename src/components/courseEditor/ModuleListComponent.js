@@ -2,7 +2,7 @@ import React from "react";
 import ModuleListItem from "./ModuleListItemComponent";
 
 const ModuleList = ({modules}) =>
-    <div className>
+    <div>
             <ul className="list-group wbdv-module-list">
                 {
                     modules.map(module =>
