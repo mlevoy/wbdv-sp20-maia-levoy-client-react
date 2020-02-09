@@ -2,6 +2,14 @@ import React from "react";
 
 const WidgetForm = () =>
     <div>
+    <div className="container-fluid d-flex justify-content-end mx-2">
+        <button type="button" className="btn btn-success">Save</button>
+        <div className="custom-control btn custom-switch mx-2">
+            <input type="checkbox" className="custom-control-input" id="toggle"/>
+            <label className="custom-control-label" htmlFor="toggle">Preview</label>
+        </div>
+    </div>
+    <div className="container-fluid border my-2 p-3">
         <div className="row form-group">
             <h3 className="col-lg-7">Heading widget</h3>
             <span className="col-lg-5 row justify-content-lg-end">
@@ -38,5 +46,6 @@ const WidgetForm = () =>
             <h4>Preview</h4>
             <h1>Heading text</h1>
         </div>
+    </div>
     </div>
 export default WidgetForm

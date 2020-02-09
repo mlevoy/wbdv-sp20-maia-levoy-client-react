@@ -1,34 +1,33 @@
 import React from "react";
 import ModuleList from "./ModuleListComponent";
-import TopicList from "./TopicListComponent";
+import TopicPills from "./TopicPillsComponent";
 import WidgetForm from "./WidgetFormComponent";
+// import moduleReducer from "../../reducers/moduleReducer";
+// import lessonReducer from "../../reducers/lessonReducer";
+import {combineReducers, createStore} from "redux";
+import {Provider} from "react-redux";
+import LessonTabs from "./LessonTabsComponent";
 
-const CourseEditorComponent = ({hideCourseEditor}) =>
+const rootReducer = combineReducers({
+    // modules: moduleReducer,
+    // lessons: lessonReducer
+})
+
+const store = createStore(rootReducer)
+
+const CourseEditorComponent = ({match, history, courseId, moduleId, lessonId}) =>
     <div className="container-fluid">
         <div className="row bg-light">
             <div className="col-sm-4 py-2">
-                <button type="button" onClick={hideCourseEditor}
-                        className="btn wbdv-course-editor wbdv-close"><i className="fas fa-times"/></button>
+                <button className={"btn"} onClick={() => history.push("/")}><i className="fas fa-times"/></button>
                 <h6 className="text-dark d-inline wbdv-course-title">CS5500 - Software Engineering Graduate</h6>
             </div>
             <div className="col-sm-8">
-                <ul className="nav nav-tabs nav-fill flex-column flex-md-row py-2">
-                    <li className="nav-item"><a className="nav-link bg-primary text-white border wbdv-page-tab"
-                                                href="#">Build</a></li>
-                    <li className="nav-item"><a
-                        className="nav-link  border bg-primary active wbdv-page-tab text-white" href="#">Pages</a>
-                    </li>
-                    <li className="nav-item"><a className="nav-link border bg-primary text-white wbdv-page-tab"
-                                                href="#">Theme</a></li>
-                    <li className="nav-item"><a className="nav-link border bg-primary text-white wbdv-page-tab "
-                                                href="#">Store</a></li>
-                    <li className="nav-item"><a className="nav-link border bg-primary text-white wbdv-page-tab"
-                                                href="#">Apps</a></li>
-                    <li className="nav-item"><a className="nav-link border bg-primary text-white wbdv-page-tab"
-                                                href="#">Settings</a></li>
-                    <button className="fa-1x btn mx-1 wbdv-new-page-btn" href="#"><i className="fas fa-plus"/>
-                    </button>
-                </ul>
+                <LessonTabs lessons={[
+                    {_id: "8543", title: "Lesson 1"},
+                    {_id: "993", title: "Lesson 2"},
+                    {_id: "028", title: "Lesson 3"},
+                ]}/>
             </div>
         </div>
         <div className="row">
@@ -40,14 +39,12 @@ const CourseEditorComponent = ({hideCourseEditor}) =>
         ]}/>
             </div>
         <div className="col-sm-8 bg-white">
-            <TopicList modules={[
+            <TopicPills topics={[
                 {_id: "878", title: "topic 1"},
                 {_id: "32432", title: "topic 2"},
                 {_id: "747", title: "topic 3"},
             ]}/>
-            <div className="container-fluid border my-2 p-3">
-                <WidgetForm/>
-            </div>
+            <WidgetForm/>
             <button className="btn nav-link bg-danger text-white mx-2 float-right wbdv-add-widget" href="#">+</button>
 
         </div>
