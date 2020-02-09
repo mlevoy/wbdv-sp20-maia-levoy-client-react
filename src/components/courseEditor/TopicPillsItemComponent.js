@@ -28,7 +28,7 @@ class TopicPillsItem extends React.Component {
                  <i className="btn fas fa-check text-white" ref={this.save}
                     onClick={(e) => {
                         this.setState({
-                            module: {
+                            topic: {
                                 ...this.state.topic,
                             }
                         })

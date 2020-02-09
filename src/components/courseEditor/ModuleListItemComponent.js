@@ -10,20 +10,36 @@ class ModuleListItem extends React.Component {
         selected: false,
         module: this.props.module,
     }
+
+
     moduleSelected = (e) =>
     {e.target === this.save.current ? this.setState({
         selected: false
     }) : this.setState({
-        selected: true })
+        selected: true})
     }
+
     render() {
         return (
         <li className={"list-group-item list-group-item-action my-2 d-flex justify-content-between wbdv-module-item "  + (this.state.selected ? 'list-group-item-primary' : '')}>
-            <span className="wbdv-module-item-title">{this.props.module.title}</span>
             {!this.state.selected &&
-            <i className="btn d-inline fas fa-pencil-alt wbdv-edit text-primary" onClick={(event => this.moduleSelected(event))}/>}
+            <span className="wbdv-module-item-title">{this.props.module.title}</span>}
+            {!this.state.selected &&
+            <i className="btn d-inline fas fa-pencil-alt wbdv-edit text-primary" onClick={() => this.setState({
+                selected: true})}/>
+            }
+
             {this.state.selected &&
-            <span>
+                    <input
+                        onChange={(e) => this.setState({
+                            module: {
+                                ...this.state.module,
+                                title: e.target.value
+                            }
+                        })}
+                        value={this.state.module.title}/>}
+            {this.state.selected &&
+                <span>
                  <i className="btn fas fa-check text-primary" ref={this.save}
                     onClick={(e) => {
                         this.setState({
