@@ -1,5 +1,5 @@
 import React from "react";
-import {updateCourse} from "../../services/CourseService";
+import {updateTopic} from "../../services/TopicService.js";
 
 class TopicPillsItem extends React.Component {
     constructor(props) {
@@ -32,7 +32,7 @@ class TopicPillsItem extends React.Component {
                                 ...this.state.topic,
                             }
                         })
-                        // updateTopic(this.state.topic._id, this.state.topic).then(status => {})
+                        updateTopic(this.state.topic._id, this.state.topic).then(status => {})
                         this.setState({
                             selected: false})
                     }

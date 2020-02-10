@@ -1,5 +1,5 @@
 import React from "react";
-import {updateCourse} from "../../services/CourseService";
+import {updateModule} from "../../services/ModuleService";
 
 class ModuleListItem extends React.Component {
     constructor(props) {
@@ -7,7 +7,7 @@ class ModuleListItem extends React.Component {
         this.save = React.createRef();
     }
     state = {
-        selected: false,
+        selected: this.props.editing,
         module: this.props.module,
     }
 
@@ -25,8 +25,11 @@ class ModuleListItem extends React.Component {
             {!this.state.selected &&
             <span className="wbdv-module-item-title">{this.props.module.title}</span>}
             {!this.state.selected &&
-            <i className="btn d-inline fas fa-pencil-alt wbdv-edit text-primary" onClick={() => this.setState({
-                selected: true})}/>
+            <i className="btn d-inline fas fa-pencil-alt wbdv-edit text-primary" onClick={() => {this.setState({
+                selected: true})
+                const moduleId = this.state.module._id
+                this.props.history.push(`/course-editor/${this.props.courseId}/module/${moduleId}`)
+            }}/>
             }
 
             {this.state.selected &&
@@ -47,14 +50,15 @@ class ModuleListItem extends React.Component {
                                 ...this.state.module,
                             }
                         })
-                        // updateModule(this.state.module._id, this.state.module).then(status => {})
+                        this.props.editModule(this.state.module)
                         this.setState({
                             selected: false})
                     }
                     }
                  />
             <i className="btn d-inline wbdv-row wbdv-button wbdv-delete fas fa fa-times text-primary"
-               onClick={() => this.props.deleteCourse(this.state.course)}/>
+               onClick={() => this.props.removeModule(this.state.module._id)}
+            />
             </span>}
         </li>
         )

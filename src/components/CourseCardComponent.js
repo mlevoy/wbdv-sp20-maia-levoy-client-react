@@ -1,5 +1,6 @@
 import React from "react";
 import {updateCourse} from "../services/CourseService";
+import {Link} from "react-router-dom";
 class CourseCardComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -27,8 +28,8 @@ class CourseCardComponent extends React.Component {
                 <div className="card">
                 <i className="card-img-top text-center fas fa-file-alt text-primary fa-10x wbdv-icon" onClick={this.props.showCourseEditor}/>
                 <div className="card-body text-center">
-                {!this.state.editing && <a className="d-block text-truncate text-dark wbdv-title" href="#"
-                       onClick={this.props.showCourseEditor}>{this.state.course.title}</a>}
+                {!this.state.editing && <Link className="d-block text-truncate text-dark wbdv-title" to={`/course-editor/${this.state.course._id}`}
+                       onClick={this.props.showCourseEditor}>{this.state.course.title}</Link>}
                        {this.state.editing && <input onChange={(e) => this.setState({
                                 course: {
                                     ...this.state.course,

@@ -142,14 +142,14 @@ class CourseManagerContainer extends React.Component {
                     <Route
                         path="/"
                         exact={true}
-                        render={() =>
+                        render={(props) =>
                             <div>
                             <CourseManagerHeadingComponent updateForm={this.updateForm}
                                                            addCourse={this.addCourse}
                                                            newValue={this.state.newCourseTitle}/>
                             <CourseTableComponent
+                                {...props}
                                 toggle={this.toggle}
-                                // layout={this.state.layout}
                                 showCourseEditor={this.showCourseEditor}
                                 deleteCourse={this.deleteCourse}
                                 courses={this.state.courses}
@@ -159,12 +159,13 @@ class CourseManagerContainer extends React.Component {
                     <Route
                         path="/grid"
                         exact={true}
-                        render={() =>
+                        render={(props) =>
                             <div>
                                 <CourseManagerHeadingComponent updateForm={this.updateForm}
                                                                addCourse={this.addCourse}
                                                                newValue={this.state.newCourseTitle}/>
                             <CourseGridComponent
+                                {...props}
                                 showCourseEditor={this.showCourseEditor}
                                 toggle={this.toggle}
                                 courses={this.state.courses}

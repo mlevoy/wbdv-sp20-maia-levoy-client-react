@@ -2,25 +2,27 @@ import React from "react";
 import ModuleList from "./ModuleListComponent";
 import TopicPills from "./TopicPillsComponent";
 import WidgetForm from "./WidgetFormComponent";
-// import moduleReducer from "../../reducers/moduleReducer";
-// import lessonReducer from "../../reducers/lessonReducer";
+import moduleReducer from "../../reducers/moduleReducer";
+import lessonReducer from "../../reducers/lessonReducer";
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 import LessonTabs from "./LessonTabsComponent";
 
+
 const rootReducer = combineReducers({
-    // modules: moduleReducer,
-    // lessons: lessonReducer
+    modules: moduleReducer,
+    lessons: lessonReducer
 })
 
 const store = createStore(rootReducer)
 
 const CourseEditorComponent = ({match, history, courseId, moduleId, lessonId}) =>
+    <Provider store={store}>
     <div className="container-fluid">
         <div className="row bg-light">
             <div className="col-sm-4 py-2">
                 <button className={"btn"} onClick={() => history.push("/")}><i className="fas fa-times"/></button>
-                <h6 className="text-dark d-inline wbdv-course-title">CS5500 - Software Engineering Graduate</h6>
+                <h6 className="text-dark d-inline wbdv-course-title">{courseId}</h6>
             </div>
             <div className="col-sm-8">
                 <LessonTabs lessons={[
@@ -32,11 +34,10 @@ const CourseEditorComponent = ({match, history, courseId, moduleId, lessonId}) =
         </div>
         <div className="row">
             <div className="col-sm-4 bg-light">
-        <ModuleList modules={[
-            {_id: "123", title: "CSS"},
-            {_id: "234", title: "HTML"},
-            {_id: "345", title: "React JS"},
-        ]}/>
+        <ModuleList courseId={courseId}
+                    history={history}
+                    module={moduleId}
+        />
             </div>
         <div className="col-sm-8 bg-white">
             <TopicPills topics={[
@@ -50,5 +51,6 @@ const CourseEditorComponent = ({match, history, courseId, moduleId, lessonId}) =
         </div>
         </div>
     </div>
+    </Provider>
 
 export default CourseEditorComponent

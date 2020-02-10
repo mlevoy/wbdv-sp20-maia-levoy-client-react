@@ -11,7 +11,7 @@ export const deleteModule = (moduleId) =>
     })
         .then(response => response.json())
 
-export const updateModule = async (moduleId, module) => {
+export const updateModule = async (module, moduleId) => {
     const response = await fetch(`${NONCOURSE_API}/modules/${moduleId}`, {
         method: 'PUT',
         body: JSON.stringify(module),
