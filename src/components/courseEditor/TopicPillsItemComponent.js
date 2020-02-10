@@ -18,7 +18,7 @@ class TopicPillsItem extends React.Component {
     }
     render() {
         return (
-            <li className="nav-item wbdv-topic-pill my-1 my-md-0">
+            <li className="nav-item wbdv-topic-pill my-1 my-md-0 text-center">
                 <a className={"nav-link mx-2 text-white border wbdv-page-tab " + (this.state.selected ? 'bg-primary' : 'bg-secondary')} href={"#"}>
                     <span className="wbdv-module-item-title">{this.props.lesson.title}</span>
                     {!this.state.selected &&

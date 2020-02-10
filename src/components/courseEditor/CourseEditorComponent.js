@@ -36,7 +36,7 @@ const CourseEditorComponent = ({match, history, courseId, moduleId, lessonId}) =
             <div className="col-sm-4 bg-light">
         <ModuleList courseId={courseId}
                     history={history}
-                    module={moduleId}
+                    moduleId={moduleId}
         />
             </div>
         <div className="col-sm-8 bg-white">

@@ -30,7 +30,7 @@ class ModuleList extends React.Component {
                             key={module._id}
 
                             history={this.props.history}
-                            editM={() => {
+                            edit={() => {
                                 const moduleId = module._id
                                 this.props.history.push(`/course-editor/${this.props.courseId}/module/${moduleId}`)
                                 this.setState({
@@ -41,14 +41,14 @@ class ModuleList extends React.Component {
                                 const moduleId = module._id
                                 this.props.history.push(`/course-editor/${this.props.courseId}/module/${moduleId}`)
                                 this.setState({
-                                    activeModuleId: module._id
+                                    activeModuleId: moduleId
                                 })
                             }}
                             save={() => {
                                 this.setState({
                                     editingModuleId: ''
                                 })
-                            }//this.props.editModule(module)}
+                            }
                             }
                             editing={module._id === this.state.editingModuleId}
                             active={module._id === this.state.activeModuleId}
@@ -58,18 +58,14 @@ class ModuleList extends React.Component {
                             editModule = {this.props.editModule}/>
                             )
                     }
-                            {/*history = {this.props.history}*/}
-                            {/*editModule = {this.props.editModule}*/}
-                            {/*removeModule = {this.props.removeModule}*/}
-                            {/*module={module}/>*/}
+                    <div className="d-flex justify-content-center my-2 text-primary-color">
+                        <button className="fa-1x btn wbdv-module-item-add-btn"
+                                onClick={() => this.props.createModule(this.props.courseId, {title: 'New Module'})}>
+                            <i className="fas fa-plus mx-1"/>
+                        </button>
+                    </div>
 
                 </ul>
-                <div className="d-flex justify-content-end my-2 text-primary-color">
-                    <button className="fa-1x btn wbdv-module-item-add-btn"
-                            onClick={() => this.props.createModule(this.props.courseId, {title: 'New Module'})}>
-                        <i className="fas fa-plus mx-1"/>
-                    </button>
-                </div>
             </div>
         )
     }
@@ -90,8 +86,8 @@ const dispatchToPropertyMapper = (dispatch) => {
                     modules: actualModules
                 })),
         editModule: async (module) => {
-            const updatedModule = await moduleService.updateModule(module, module._id)
-            dispatch(updateModule(updatedModule))
+            const status = await moduleService.updateModule(module, module._id)
+            dispatch(updateModule(module))
         },
         removeModule: (moduleId) =>
             moduleService.deleteModule(moduleId)

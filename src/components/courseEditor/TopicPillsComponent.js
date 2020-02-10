@@ -11,8 +11,12 @@ const TopicPills = ({topics}) =>
                         key={lesson._id}
                         lesson={lesson}/>
                 )
-
             }
+            <li className="nav-item wbdv-topic-pill wbdv-topic-add-btn my-1 my-md-0 text-center">
+                <a className="nav-link bg-secondary text-white mx-2" href="#">
+                    +
+                </a>
+            </li>
         </ul>
     </div>
 

@@ -7,7 +7,7 @@ class ModuleListItem extends React.Component {
         this.save = React.createRef();
     }
     state = {
-        selected: this.props.editing,
+        selected: this.props.active,
         module: this.props.module,
     }
 
@@ -21,18 +21,20 @@ class ModuleListItem extends React.Component {
 
     render() {
         return (
-        <li className={"list-group-item list-group-item-action my-2 d-flex justify-content-between wbdv-module-item "  + (this.state.selected ? 'list-group-item-primary' : '')}>
-            {!this.state.selected &&
+        <li onClick = {this.props.select}
+            className={"list-group-item list-group-item-action my-2 d-flex justify-content-between wbdv-module-item "  + (this.props.active ? 'list-group-item-primary' : '')}>
+            {!this.props.editing &&
             <span className="wbdv-module-item-title">{this.props.module.title}</span>}
-            {!this.state.selected &&
-            <i className="btn d-inline fas fa-pencil-alt wbdv-edit text-primary" onClick={() => {this.setState({
-                selected: true})
+            {!this.props.editing &&
+            <i className="btn d-inline fas fa-pencil-alt wbdv-edit text-primary" onClick={() => {
+                // this.setState({
+                // selected: true})
+                this.props.edit()
                 const moduleId = this.state.module._id
-                this.props.history.push(`/course-editor/${this.props.courseId}/module/${moduleId}`)
             }}/>
             }
 
-            {this.state.selected &&
+            {this.props.active && this.props.editing &&
                     <input
                         onChange={(e) => this.setState({
                             module: {
@@ -41,7 +43,7 @@ class ModuleListItem extends React.Component {
                             }
                         })}
                         value={this.state.module.title}/>}
-            {this.state.selected &&
+            {this.props.active && this.props.editing &&
                 <span>
                  <i className="btn fas fa-check text-primary" ref={this.save}
                     onClick={(e) => {
@@ -50,9 +52,10 @@ class ModuleListItem extends React.Component {
                                 ...this.state.module,
                             }
                         })
-                        this.props.editModule(this.state.module)
-                        this.setState({
-                            selected: false})
+                        // this.props.editModule(this.state.module)
+                        this.props.save()
+                        // this.setState({
+                        //     selected: false})
                     }
                     }
                  />
