@@ -9,7 +9,6 @@ const moduleReducer = (state = {modules: []}, action) => {
                 modules: action.modules
             }
         case CREATE_MODULE:
-            console.log(action)
             return {
                 modules: [
                     ...state.modules,

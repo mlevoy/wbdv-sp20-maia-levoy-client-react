@@ -17,6 +17,7 @@ class ModuleList extends React.Component {
     }
 
     state = {
+        moduleToChange: '',
         activeModuleId: this.props.moduleId,
         editingModuleId: '',
     }
@@ -28,13 +29,13 @@ class ModuleList extends React.Component {
                     {this.props.modules && this.props.modules.map(module =>
                         <ModuleListItem
                             key={module._id}
-
                             history={this.props.history}
                             edit={() => {
                                 const moduleId = module._id
                                 this.props.history.push(`/course-editor/${this.props.courseId}/module/${moduleId}`)
                                 this.setState({
-                                    editingModuleId: module._id
+                                    editingModuleId: module._id,
+                                    moduleToChange: module
                                 })
                             }}
                             select={() => {
@@ -48,16 +49,25 @@ class ModuleList extends React.Component {
                                 this.setState({
                                     editingModuleId: ''
                                 })
-                            }
-                            }
+                                this.props.editModule(this.state.moduleToChange)
+                            }}
+                            change={(e) => {
+                                this.setState({
+                                moduleToChange: {
+                                    ...this.state.moduleToChange,
+                                    title: e.target.value
+                                }
+                            })
+                                console.log(this.state.moduleToChange)
+
+                            }}
                             editing={module._id === this.state.editingModuleId}
                             active={module._id === this.state.activeModuleId}
                             module={module}
-                            courseId={this.props.courseId}
+                            moduleToChange={this.state.moduleToChange}
                             removeModule = {this.props.removeModule}
                             editModule = {this.props.editModule}/>
-                            )
-                    }
+                            )}
                     <div className="d-flex justify-content-center my-2 text-primary-color">
                         <button className="fa-1x btn wbdv-module-item-add-btn"
                                 onClick={() => this.props.createModule(this.props.courseId, {title: 'New Module'})}>
