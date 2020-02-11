@@ -22,7 +22,6 @@ const ModuleListItem = ({moduleToChange, save, edit, editing, module, removeModu
                     onClick={(e) =>
                         save()
                     }
-
                  />
             <i className="btn d-inline wbdv-row wbdv-button wbdv-delete fas fa fa-times text-primary"
                onClick={() => removeModule(module._id)}

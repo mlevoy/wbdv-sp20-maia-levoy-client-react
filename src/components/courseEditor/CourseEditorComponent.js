@@ -25,11 +25,11 @@ const CourseEditorComponent = ({match, history, courseId, moduleId, lessonId}) =
                 <h6 className="text-dark d-inline wbdv-course-title">{courseId}</h6>
             </div>
             <div className="col-sm-8">
-                <LessonTabs lessons={[
-                    {_id: "8543", title: "Lesson 1"},
-                    {_id: "993", title: "Lesson 2"},
-                    {_id: "028", title: "Lesson 3"},
-                ]}/>
+                <LessonTabs lessonId={lessonId}
+                            courseId={courseId}
+                            match={match}
+                            history={history}
+                            moduleId={moduleId}/>
             </div>
         </div>
         <div className="row">

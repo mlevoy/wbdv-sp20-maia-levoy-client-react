@@ -3,13 +3,11 @@ import ModuleListItem from "./ModuleListItemComponent";
 import {connect} from "react-redux";
 import {
     CREATE_MODULE,
-    FIND_MODULES_FOR_COURSE,
     UPDATE_MODULE,
     deleteModule,
-    updateModule
+    updateModule, findModules
 } from "../../actions/moduleActions";
 import moduleService from '../../services/ModuleService'
-
 class ModuleList extends React.Component {
 
     componentDidMount() {
@@ -58,7 +56,6 @@ class ModuleList extends React.Component {
                                     title: e.target.value
                                 }
                             })
-                                console.log(this.state.moduleToChange)
 
                             }}
                             editing={module._id === this.state.editingModuleId}
@@ -90,11 +87,8 @@ const stateToPropertyMapper = (state) => {
 const dispatchToPropertyMapper = (dispatch) => {
     return {
         findModules: (courseId) =>
-            moduleService.findModulesForCourse(courseId)
-                .then(actualModules => dispatch({
-                    type: FIND_MODULES_FOR_COURSE,
-                    modules: actualModules
-                })),
+            moduleService.findModulesForCourse(courseId).then(modules=>
+                dispatch(findModules(modules))),
         editModule: async (module) => {
             const status = await moduleService.updateModule(module, module._id)
             dispatch(updateModule(module))

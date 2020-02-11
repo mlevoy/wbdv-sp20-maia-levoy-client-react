@@ -1,7 +1,7 @@
 export const FIND_MODULES_FOR_COURSE = "FIND_MODULES_FOR_COURSE"
-export const findModules = (courseId) => ({
+export const findModules = (modules) => ({
     type: FIND_MODULES_FOR_COURSE,
-    moduleId: courseId
+    modules: modules
 })
 
 export const DELETE_MODULE = "DELETE_MODULE"
