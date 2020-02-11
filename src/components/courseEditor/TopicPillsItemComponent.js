@@ -1,50 +1,30 @@
 import React from "react";
-import {updateTopic} from "../../services/TopicService.js";
+const TopicPillsItem = ({topicToChange, save, edit, editing, topic, removeTopic, active, select, change}) => {
 
-class TopicPillsItem extends React.Component {
-    constructor(props) {
-        super(props);
-        this.save = React.createRef();
-    }
-    state = {
-        selected: false,
-        topic: this.props.topic,
-    }
-    topicSelected = (e) =>
-    {e.target === this.save.current ? this.setState({
-        selected: false
-    }) : this.setState({
-        selected: true })
-    }
-    render() {
         return (
-            <li className="nav-item wbdv-topic-pill my-1 my-md-0 text-center">
-                <a className={"nav-link mx-2 text-white border wbdv-page-tab " + (this.state.selected ? 'bg-primary' : 'bg-secondary')} href={"#"}>
-                    <span className="wbdv-module-item-title">{this.props.lesson.title}</span>
-                    {!this.state.selected &&
-                    <i className="btn fas fa-pencil-alt wbdv-edit text-white" onClick={(event => this.topicSelected(event))}/>}
-                    {this.state.selected &&
+            <li className="nav-item wbdv-topic-pill my-1 my-md-0 text-center" onClick = {select}>
+                <a className={"nav-link mx-2 text-white border wbdv-page-tab " + (active ? 'bg-primary' : 'bg-secondary')} href={"#"}>
+                    {!editing &&
+                    <span className="wbdv-module-item-title">{topic.title}</span>}
+                    {!editing &&
+                    <i className="btn fas fa-pencil-alt wbdv-edit text-white" onClick={() =>
+                        edit()}/>}
+                    {active && editing &&
+                    <input
+                        onChange={(e)=> change(e)}
+                        value={topicToChange.title}/>}
+                    {active && editing &&
                     <span>
-                 <i className="btn fas fa-check text-white" ref={this.save}
-                    onClick={(e) => {
-                        this.setState({
-                            topic: {
-                                ...this.state.topic,
-                            }
-                        })
-                        updateTopic(this.state.topic._id, this.state.topic).then(status => {})
-                        this.setState({
-                            selected: false})
-                    }
+                 <i className="btn fas fa-check text-white"
+                    onClick={(e) =>
+                        save()
                     }
                  />
             <i className="btn d-inline wbdv-row wbdv-button wbdv-delete fas fa fa-times text-white"
-               // onClick={() => this.props.deleteTopic(this.state.topic)}
-                        />
+               onClick={() => removeTopic(topic._id)}/>
             </span>}
                 </a>
             </li>
         )
-    }
 }
 export default TopicPillsItem

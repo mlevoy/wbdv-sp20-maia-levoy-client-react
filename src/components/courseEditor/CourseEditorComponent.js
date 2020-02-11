@@ -4,6 +4,7 @@ import TopicPills from "./TopicPillsComponent";
 import WidgetForm from "./WidgetFormComponent";
 import moduleReducer from "../../reducers/moduleReducer";
 import lessonReducer from "../../reducers/lessonReducer";
+import topicReducer from "../../reducers/topicReducer";
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 import LessonTabs from "./LessonTabsComponent";
@@ -11,12 +12,13 @@ import LessonTabs from "./LessonTabsComponent";
 
 const rootReducer = combineReducers({
     modules: moduleReducer,
-    lessons: lessonReducer
+    lessons: lessonReducer,
+    topics: topicReducer
 })
 
 const store = createStore(rootReducer)
 
-const CourseEditorComponent = ({match, history, courseId, moduleId, lessonId}) =>
+const CourseEditorComponent = ({match, history, courseId, moduleId, lessonId, topicId}) =>
     <Provider store={store}>
     <div className="container-fluid">
         <div className="row bg-light">
@@ -27,7 +29,6 @@ const CourseEditorComponent = ({match, history, courseId, moduleId, lessonId}) =
             <div className="col-sm-8">
                 <LessonTabs lessonId={lessonId}
                             courseId={courseId}
-                            match={match}
                             history={history}
                             moduleId={moduleId}/>
             </div>
@@ -40,11 +41,11 @@ const CourseEditorComponent = ({match, history, courseId, moduleId, lessonId}) =
         />
             </div>
         <div className="col-sm-8 bg-white">
-            <TopicPills topics={[
-                {_id: "878", title: "topic 1"},
-                {_id: "32432", title: "topic 2"},
-                {_id: "747", title: "topic 3"},
-            ]}/>
+            <TopicPills lessonId={lessonId}
+                        courseId={courseId}
+                        topicId={topicId}
+                        history={history}
+                        moduleId={moduleId}/>
             <WidgetForm/>
             <button className="btn nav-link bg-danger text-white mx-2 float-right wbdv-add-widget" href="#">+</button>
 

@@ -57,8 +57,6 @@ class LessonTabs extends React.Component {
                                             title: e.target.value
                                         }
                                     })
-                                    console.log(this.state.lessonToChange)
-
                                 }}
                                 editing={lesson._id === this.state.editingLessonId}
                                 active={lesson._id === this.state.activeLessonId}
@@ -84,7 +82,6 @@ class LessonTabs extends React.Component {
     }
 
     const dispatchToPropertyMapper = (dispatch) => {
-    console.log(dispatch)
     return {
         findLessons: (moduleId) =>
          lessonService.findLessonsForModule(moduleId).then(lessons =>
