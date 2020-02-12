@@ -3,7 +3,7 @@ const LessonTabsItem = ({lessonToChange, save, edit, editing, lesson, removeLess
 
         return (
             <li className = {"nav-item"} onClick = {select}>
-                <a className={"nav-link text-white border wbdv-page-tab " + (active ? 'bg-primary' : 'bg-secondary')} href={"#"}>
+                <a className={"nav-link d-flex justify-content-center text-white border wbdv-page-tab " + (active ? 'bg-primary' : 'bg-secondary')} href={"#"}>
                     {!editing &&
                 <span className="wbdv-module-item-title">{lesson.title}</span>}
                 {!editing &&

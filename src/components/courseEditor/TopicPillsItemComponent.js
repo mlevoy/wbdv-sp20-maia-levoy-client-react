@@ -3,7 +3,7 @@ const TopicPillsItem = ({topicToChange, save, edit, editing, topic, removeTopic,
 
         return (
             <li className="nav-item wbdv-topic-pill my-1 my-md-0 text-center" onClick = {select}>
-                <a className={"nav-link mx-2 text-white border wbdv-page-tab " + (active ? 'bg-primary' : 'bg-secondary')} href={"#"}>
+                <a className={"nav-link mx-2 d-flex justify-content-center text-white border wbdv-page-tab " + (active ? 'bg-primary' : 'bg-secondary')} href={"#"}>
                     {!editing &&
                     <span className="wbdv-module-item-title">{topic.title}</span>}
                     {!editing &&

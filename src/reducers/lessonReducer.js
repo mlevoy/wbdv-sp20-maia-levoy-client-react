@@ -9,20 +9,17 @@ const lessonReducer = (state = {lessons: []}, action) => {
                     action.newLesson
                 ]
             }
-            break;
         case DELETE_LESSON:
             return {
                 lessons: state.lessons.filter(
                     lesson => lesson._id !== action.lessonId)
             }
-            break;
         case UPDATE_LESSON:
             return {
                 lessons: state.lessons.map(lesson =>
                     lesson._id === action.lessonId ? action.newLesson : lesson
                 )
             }
-            break;
         case FIND_LESSONS_FOR_MODULE:
             return {
                 lessons: action.lessons

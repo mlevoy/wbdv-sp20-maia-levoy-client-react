@@ -14,6 +14,7 @@ const ModuleListItem = ({moduleToChange, save, edit, editing, module, removeModu
 
             {editing &&
                     <input
+                        className={"overflow-hidden"}
                         onChange={(e)=> change(e)}
                         value={moduleToChange.title}/>}
             {editing &&
