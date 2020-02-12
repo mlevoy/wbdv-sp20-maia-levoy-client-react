@@ -11,7 +11,18 @@ import {
 class LessonTabs extends React.Component {
 
     componentDidMount() {
+        this.mounted = true;
         this.props.findLessons(this.props.moduleId)
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props.moduleId !== prevProps.moduleId) {
+            this.props.findLessons(this.props.moduleId)
+        }
+    }
+
+    componentWillUnmount(){
+        this.mounted = false;
     }
 
     state = {
@@ -24,7 +35,7 @@ class LessonTabs extends React.Component {
         return (
             <div>
                 <ul className="nav nav-tabs nav-fill flex-column flex-md-row py-2">
-                    {this.props.lessons && this.props.lessons.map(lesson =>
+                    {this.props.moduleId &&this.props.lessons && this.props.lessons.map(lesson =>
                             <LessonTabsItem
                                 key={lesson._id}
                                 history={this.props.history}
@@ -62,13 +73,27 @@ class LessonTabs extends React.Component {
                                 active={lesson._id === this.state.activeLessonId}
                                 lesson={lesson}
                                 lessonToChange={this.state.lessonToChange}
-                                removeLesson={this.props.removeLesson}
+                                removeLesson={async (lessonId) => {
+                                    await this.props.removeLesson(lessonId)
+                                    await this.props.history.replace(`/course-editor/${this.props.courseId}/module/${this.props.moduleId}`)
+                                    this.mounted && this.setState({
+                                        lessonToChange: '',
+                                        activeLessonId: this.props.lessonId,
+                                        editingLessonId: ''
+                                    })
+                                }
+                                }
                                 editLesson={this.props.editLesson}/>
                         )
                     }
+
+                    {this.props.moduleId && this.props.modules.length && !this.props.lessons.length
+                    && <h5 className={"d-flex justify-content-center my-2"}>Add Lesson</h5>}
+                    {this.props.moduleId &&
                     <button className="fa-1x btn mx-1 wbdv-new-page-btn" href="#"
                             onClick={() => this.props.createLesson(this.props.moduleId, {title: 'New Lesson'})}><i className="fas fa-plus"/>
-                    </button>
+                    </button>}
+
                 </ul>
 
             </div>)
@@ -77,7 +102,8 @@ class LessonTabs extends React.Component {
 
     const stateToPropertyMapper = (state) => {
     return {
-        lessons: state.lessons.lessons
+        lessons: state.lessons.lessons,
+        modules: state.modules.modules
     }
     }
 
@@ -90,10 +116,10 @@ class LessonTabs extends React.Component {
             const status = await lessonService.updateLesson(lesson._id, lesson)
             dispatch(updateLesson(lesson))
         },
-        removeLesson: (lessonId) =>
-            lessonService.deleteLesson(lessonId)
-                .then(status =>
-                    dispatch(deleteLesson(lessonId))),
+        removeLesson: async (lessonId) => {
+            const status = await lessonService.deleteLesson(lessonId)
+            dispatch(deleteLesson(lessonId))
+        },
         createLesson: async (moduleId, lesson) => {
             const response = await lessonService.createLesson(moduleId, lesson)
             dispatch(createLesson(response))

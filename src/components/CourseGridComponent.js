@@ -2,7 +2,7 @@ import React from "react";
 import CourseCardComponent from "./CourseCardComponent";
 const CourseGridComponent = (attributes) =>
     <div className="container-fluid">
-        <button onClick={() => attributes.history.push('/')} type="button" className="btn wbdv-button wbdv-list-layout">
+        <button onClick={() => attributes.history.replace('/')} type="button" className="btn wbdv-button wbdv-list-layout">
             <i className="fas fa-list"/>
         </button>
             <div className="row">

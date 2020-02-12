@@ -9,11 +9,11 @@ const TopicPillsItem = ({topicToChange, save, edit, editing, topic, removeTopic,
                     {!editing &&
                     <i className="btn fas fa-pencil-alt wbdv-edit text-white" onClick={() =>
                         edit()}/>}
-                    {active && editing &&
+                    {editing &&
                     <input
                         onChange={(e)=> change(e)}
                         value={topicToChange.title}/>}
-                    {active && editing &&
+                    {editing &&
                     <span>
                  <i className="btn fas fa-check text-white"
                     onClick={(e) =>

@@ -10,7 +10,18 @@ import {
 } from "../../actions/topicActions";
 class TopicPills extends React.Component {
     componentDidMount() {
+        this.mounted = true
         this.props.findTopics(this.props.lessonId)
+    }
+
+    componentWillUnmount(){
+        this.mounted = false
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props.lessonId !== prevProps.lessonId) {
+            this.props.findTopics(this.props.lessonId)
+        }
     }
 
     state = {
@@ -41,7 +52,10 @@ class TopicPills extends React.Component {
                                 const topicId = topic._id
                                 const lessonId = this.props.lessonId
                                 const moduleId = this.props.moduleId
-                                this.props.history.push(`/course-editor/${this.props.courseId}/module/${moduleId}/lesson/${lessonId}/topic/${topicId}`)
+                                this.props.history.push(`/course-editor/${this.props.courseId}/module/${moduleId}/lesson/${lessonId}/topic/${topicId}`
+
+                                // ${lessonId}${topicId ?"/topic/"+topicId:"ASDF" }`
+                                  )//
                                 this.setState({
                                     activeTopicId: topicId
                                 })
@@ -64,16 +78,28 @@ class TopicPills extends React.Component {
                             active={topic._id === this.state.activeTopicId}
                             topic={topic}
                             topicToChange={this.state.topicToChange}
-                            removeTopic={this.props.removeTopic}
+                            removeTopic={async (id) => {
+                                await this.props.removeTopic(id)
+                                const lessonId = this.props.lessonId
+                                const moduleId = this.props.moduleId
+                                await this.props.history.replace(`/course-editor/${this.props.courseId}/module/${moduleId}/lesson/${lessonId}`)
+                                this.mounted && this.setState({
+                                    topicToChange: '',
+                                    activeTopicId: this.props.topicId,
+                                    editingTopicId: ''})
+                            }}
                             editTopic={this.props.editTopic}/>
                     )
                     }
-                    <li className="nav-item wbdv-topic-pill wbdv-topic-add-btn my-1 my-md-0 text-center">
+                    {this.props.lessonId && this.props.lessons.length && !this.props.topics.length
+                    && <h5 className={"d-flex justify-content-center my-2"}>Add Topic</h5>}
+                    {this.props.lessonId &&
+                    <li className="d-flex justify-content-center nav-item wbdv-topic-pill wbdv-topic-add-btn my-1 my-md-0 text-center">
                         <button className="nav-link bg-secondary text-white mx-2"
                                 onClick={() => this.props.createTopic(this.props.lessonId, {title: 'New Topic'})}>
                             <i className="fas fa-plus"/>
                         </button>
-                    </li>
+                    </li>}
                 </ul>
             </div>
         )
@@ -83,7 +109,8 @@ class TopicPills extends React.Component {
 
 const stateToPropertyMapper = (state) => {
     return {
-        topics: state.topics.topics
+        topics: state.topics.topics,
+        lessons: state.lessons.lessons
     }
 }
 

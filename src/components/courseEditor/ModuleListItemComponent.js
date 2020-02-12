@@ -12,11 +12,11 @@ const ModuleListItem = ({moduleToChange, save, edit, editing, module, removeModu
                 edit()}/>
             }
 
-            {active && editing &&
+            {editing &&
                     <input
                         onChange={(e)=> change(e)}
                         value={moduleToChange.title}/>}
-            {active && editing &&
+            {editing &&
                 <span>
                  <i className="btn fas fa-check text-primary"
                     onClick={(e) =>

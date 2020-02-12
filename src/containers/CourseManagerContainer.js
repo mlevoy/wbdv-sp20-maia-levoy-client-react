@@ -4,7 +4,24 @@ import CourseTableComponent from "../components/CourseTableComponent";
 import CourseGridComponent from "../components/CourseGridComponent";
 import CourseEditor from "../components/courseEditor/CourseEditorComponent";
 import {deleteCourse, createCourse, findAllCourses} from "../services/CourseService"
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route} from "react-router-dom";
+
+import moduleReducer from "../reducers/moduleReducer";
+import lessonReducer from "../reducers/lessonReducer";
+import topicReducer from "../reducers/topicReducer";
+import {combineReducers, createStore} from "redux";
+import {Provider} from "react-redux";
+import courseReducer from "../reducers/courseReducer"
+
+
+const rootReducer = combineReducers({
+    courses: courseReducer,
+    modules: moduleReducer,
+    lessons: lessonReducer,
+    topics: topicReducer
+})
+
+const store = createStore(rootReducer)
 
 
 class CourseManagerContainer extends React.Component {
@@ -110,7 +127,8 @@ class CourseManagerContainer extends React.Component {
 
     render() {
         return(
-            <div>
+            <Provider store={store}>
+                <div>
                 <Router>
                     <Route
                         path="/course-editor/:courseId"
@@ -186,6 +204,7 @@ class CourseManagerContainer extends React.Component {
                         }/>
                 </Router>
             </div>
+            </Provider>
         )
     }
 }

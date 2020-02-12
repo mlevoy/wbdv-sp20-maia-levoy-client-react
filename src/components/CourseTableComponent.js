@@ -14,7 +14,7 @@ const CourseTableComponent = ({courses, deleteCourse, toggle, showCourseEditor, 
                 </th>
                 <th className="col d-none d-lg-table-cell wbdv-header wbdv-last-modified">Last modified by me</th>
                 <th className="col d-lg-table-cell col-md-2">
-                    <button onClick={() => history.push('/grid')} className="btn wbdv-button wbdv-grid-layout">
+                    <button onClick={() => history.replace('/grid')} className="btn wbdv-button wbdv-grid-layout">
                         <i className="fas fa-grip-horizontal"/>
                     </button>
                     <button type="button" className="btn wbdv-header wbdv-sort">

@@ -11,8 +11,14 @@ import moduleService from '../../services/ModuleService'
 class ModuleList extends React.Component {
 
     componentDidMount() {
+        this.mounted= true
         this.props.findModules(this.props.courseId)
     }
+
+    componentWillUnmount(){
+        this.mounted= false
+    }
+
 
     state = {
         moduleToChange: '',
@@ -62,16 +68,26 @@ class ModuleList extends React.Component {
                             active={module._id === this.state.activeModuleId}
                             module={module}
                             moduleToChange={this.state.moduleToChange}
-                            removeModule = {this.props.removeModule}
+                            removeModule={async (moduleId) => {
+                                await this.props.removeModule(moduleId)
+                                await this.props.history.replace(`/course-editor/${this.props.courseId}`)
+                                this.mounted && this.setState({
+                                    moduleToChange: '',
+                                    activeModuleId: this.props.moduleId,
+                                    editingModuleId: ''
+                                })
+                            }
+                            }
                             editModule = {this.props.editModule}/>
                             )}
-                    <div className="d-flex justify-content-center my-2 text-primary-color">
+
+                    <div className="d-flex flex-column justify-content-center my-2 text-primary-color">
+                        {!this.props.modules.length && <h5 className={"d-flex justify-content-center"}>Add Modules</h5>}
                         <button className="fa-1x btn wbdv-module-item-add-btn"
                                 onClick={() => this.props.createModule(this.props.courseId, {title: 'New Module'})}>
                             <i className="fas fa-plus mx-1"/>
                         </button>
                     </div>
-
                 </ul>
             </div>
         )

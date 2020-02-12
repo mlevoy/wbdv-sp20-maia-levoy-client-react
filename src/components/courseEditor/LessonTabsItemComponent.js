@@ -9,11 +9,11 @@ const LessonTabsItem = ({lessonToChange, save, edit, editing, lesson, removeLess
                 {!editing &&
                 <i className="btn fas fa-pencil-alt wbdv-edit text-white" onClick={() =>
                     edit()}/>}
-                    {active && editing &&
+                    {editing &&
                     <input
                         onChange={(e)=> change(e)}
                         value={lessonToChange.title}/>}
-                {active && editing &&
+                {editing &&
                 <span>
                  <i className="btn fas fa-check text-white"
                     onClick={(e) =>
