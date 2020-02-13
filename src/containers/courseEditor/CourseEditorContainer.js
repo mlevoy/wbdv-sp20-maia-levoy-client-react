@@ -1,7 +1,7 @@
 import React from "react";
 import ModuleList from "./ModuleListContainer";
 import TopicPills from "./TopicPillsContainer";
-import WidgetForm from "../../components/courseEditor/WidgetFormComponent";
+import WidgetList from "../../components/courseEditor/WidgetListComponent";
 import {connect} from "react-redux";
 import LessonTabs from "./LessonTabsContainer";
 import {findAllCourses, findCourseById} from "../../services/CourseService"
@@ -41,7 +41,7 @@ class CourseEditorContainer extends React.Component {
                                 topicId={this.props.topicId}
                                 history={this.props.history}
                                 moduleId={this.props.moduleId}/>
-                    <WidgetForm/>
+                    <WidgetList/>
                     <button className="btn nav-link bg-danger text-white mx-2 float-right wbdv-add-widget" href="#">+
                     </button>
 
