@@ -2,7 +2,7 @@ import React from "react";
 import CourseManagerHeadingComponent from "../components/CourseManagerHeadingComponent";
 import CourseTableComponent from "../components/CourseTableComponent";
 import CourseGridComponent from "../components/CourseGridComponent";
-import CourseEditor from "../components/courseEditor/CourseEditorComponent";
+import CourseEditor from "./courseEditor/CourseEditorContainer";
 import {deleteCourse, createCourse, findAllCourses} from "../services/CourseService"
 import {BrowserRouter as Router, Route} from "react-router-dom";
 

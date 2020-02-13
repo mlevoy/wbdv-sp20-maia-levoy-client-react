@@ -1,5 +1,5 @@
 import React from "react";
-import ModuleListItem from "./ModuleListItemComponent";
+import ModuleListItem from "../../components/courseEditor/ModuleListItemComponent";
 import {connect} from "react-redux";
 import {
     CREATE_MODULE,

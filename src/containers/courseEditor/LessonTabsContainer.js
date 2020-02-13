@@ -1,5 +1,5 @@
 import React from "react";
-import LessonTabsItem from "./LessonTabsItemComponent";
+import LessonTabsItem from "../../components/courseEditor/LessonTabsItemComponent";
 import {connect} from "react-redux";
 import lessonService from "../../services/LessonService";
 import {

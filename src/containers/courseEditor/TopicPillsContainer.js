@@ -1,5 +1,5 @@
 import React from "react";
-import TopicPillsItem from "./TopicPillsItemComponent";
+import TopicPillsItem from "../../components/courseEditor/TopicPillsItemComponent";
 import {connect} from "react-redux";
 import topicService from "../../services/TopicService";
 import {

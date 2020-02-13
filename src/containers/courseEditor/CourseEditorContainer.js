@@ -1,13 +1,13 @@
 import React from "react";
-import ModuleList from "./ModuleListComponent";
-import TopicPills from "./TopicPillsComponent";
-import WidgetForm from "./WidgetFormComponent";
+import ModuleList from "./ModuleListContainer";
+import TopicPills from "./TopicPillsContainer";
+import WidgetForm from "../../components/courseEditor/WidgetFormComponent";
 import {connect} from "react-redux";
-import LessonTabs from "./LessonTabsComponent";
+import LessonTabs from "./LessonTabsContainer";
 import {findAllCourses, findCourseById} from "../../services/CourseService"
 
 
-class CourseEditorComponent extends React.Component {
+class CourseEditorContainer extends React.Component {
     componentDidMount() {
         this.props.findCourses().then((e)=>this.props.findEditingCourse(this.props.courseId))
            .then((t)=>this.props.course)
@@ -77,4 +77,4 @@ const dispatchToPropertyMapper = (dispatch) => {
 }
 
 
-export default connect(stateToPropertyMapper, dispatchToPropertyMapper)(CourseEditorComponent)
+export default connect(stateToPropertyMapper, dispatchToPropertyMapper)(CourseEditorContainer)
