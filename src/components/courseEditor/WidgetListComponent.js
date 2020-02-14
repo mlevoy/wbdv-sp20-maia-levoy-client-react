@@ -1,5 +1,6 @@
 import React from "react";
 import HeadingWidget from "./widgets/HeadingWidgetComponent";
+import ParagraphWidget from "./widgets/ParagraphWidgetComponent";
 import {connect} from "react-redux";
 import {
     createWidget,
@@ -19,6 +20,7 @@ class WidgetList extends React.Component {
             this.props.findWidgetsForTopic(this.props.topicId);
         }
     }
+    //TODO add logic for no widgets
     render(){
         return (
             <div>
@@ -33,7 +35,7 @@ class WidgetList extends React.Component {
                     this.props.widgets && this.props.widgets.map(widget =>
                         <div key={widget.id}>
                             {widget.type === "HEADING"   && <HeadingWidget deleteWidget={this.props.removeWidget} widget={widget}/>}
-                            {/*{widget.type === "PARAGRAPH" && <ParagraphWidget widget={widget}/>}*/}
+                            {widget.type === "PARAGRAPH" && <ParagraphWidget widget={widget}/>}
                         </div>
                     )
                 }
@@ -71,8 +73,8 @@ const dispatchToPropertyMapper = (dispatcher) => ({
             })),
     createWidget: (topicId) =>
         createWidget({
-            title: "New Widget",
             type: "HEADING",
+            size: 1,
             id: (new Date()).getTime() + "",
             topicId: topicId
         })
