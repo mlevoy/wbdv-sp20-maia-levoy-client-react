@@ -1,11 +1,11 @@
-import {WIDGET_API} from "../common/constants";
+import {WIDGET_API} from "../common/constants.js";
 
-export const findWidgetsForTopic = (topicd) =>
-    fetch(`http://localhost:8080/topics/${topicd}/widgets/`)
+export const findWidgetsForTopic = (topicId) =>
+    fetch(`http://localhost:8080/topics/${topicId}/widgets/`)
         .then(response => response.json())
 
 export const updateWidget = (wid, widget) =>
-    fetch(`${WIDGET_API}/${wid}`, {
+    fetch(`${WIDGET_API}${wid}`, {
         method: "PUT",
         body: JSON.stringify(widget),
         headers: {
@@ -13,12 +13,8 @@ export const updateWidget = (wid, widget) =>
         }
     }).then(response => response.json())
 
-export const findAllWidgets = () =>
-    fetch(`${WIDGET_API}`)
-        .then(response => response.json())
-
 export const deleteWidget = (widgetId) =>
-    fetch(`${WIDGET_API}/${widgetId}`, {
+    fetch(`${WIDGET_API}${widgetId}`, {
         method: "DELETE"
     }).then(response => response.json())
 

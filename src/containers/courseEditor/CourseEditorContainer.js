@@ -41,10 +41,8 @@ class CourseEditorContainer extends React.Component {
                                 topicId={this.props.topicId}
                                 history={this.props.history}
                                 moduleId={this.props.moduleId}/>
-                    <WidgetList/>
-                    <button className="btn nav-link bg-danger text-white mx-2 float-right wbdv-add-widget" href="#">+
-                    </button>
-
+                    <WidgetList topicId={this.props.topicId}
+                                widgetId={this.props.widgetId}/>
                 </div>
             </div>
         </div>)

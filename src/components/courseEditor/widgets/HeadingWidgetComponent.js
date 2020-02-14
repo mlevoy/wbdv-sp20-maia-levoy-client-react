@@ -1,5 +1,5 @@
 import React from "react";
-const HeadingWidget = () =>
+const HeadingWidget = ({deleteWidget, widget}) =>
 
 <div className="container-fluid border my-2 p-3">
     <div className="row form-group">
@@ -23,7 +23,7 @@ const HeadingWidget = () =>
                                         HTML
                                     </option>
                             </select>
-                                <button type="button" className="btn text-white bg-danger mx-1"><i
+                                <button type="button" className="btn text-white bg-danger mx-1" onClick ={() => deleteWidget(widget.id)}><i
                                     className="fas fa-times"/></button>
                             </span>
     </div>

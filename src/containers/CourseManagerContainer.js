@@ -12,13 +12,16 @@ import topicReducer from "../reducers/topicReducer";
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 import courseReducer from "../reducers/courseReducer"
+import widgetReducer from "../reducers/widgetReducer"
+
 
 
 const rootReducer = combineReducers({
     courses: courseReducer,
     modules: moduleReducer,
     lessons: lessonReducer,
-    topics: topicReducer
+    topics: topicReducer,
+    widgets: widgetReducer
 })
 
 const store = createStore(rootReducer)
