@@ -20,12 +20,13 @@ class WidgetList extends React.Component {
             this.props.findWidgetsForTopic(this.props.topicId);
         }
     }
-    //TODO add logic for no widgets
     render(){
         return (
             <div>
                 <div className="container-fluid d-flex justify-content-end mx-2">
-                    <button type="button" className="btn btn-success">Save</button>
+                    <button type="button" className="btn btn-success" onClick={() => this.props.updateAllWidgets(this.props.widgets)}>
+                        Save
+                    </button>
                     <div className="custom-control btn custom-switch mx-2">
                         <input type="checkbox" className="custom-control-input" id="toggle"/>
                         <label className="custom-control-label" htmlFor="toggle">Preview</label>
@@ -34,8 +35,10 @@ class WidgetList extends React.Component {
                 {
                     this.props.widgets && this.props.widgets.map(widget =>
                         <div key={widget.id}>
-                            {widget.type === "HEADING"   && <HeadingWidget deleteWidget={this.props.removeWidget} widget={widget}/>}
-                            {widget.type === "PARAGRAPH" && <ParagraphWidget widget={widget}/>}
+                            {widget.type === "HEADING" &&
+                            <HeadingWidget updateWidgetType={ this.props.updateWidgetType}
+                                deleteWidget={this.props.removeWidget} widget={widget}/>}
+                            {widget.type === "PARAGRAPH" && <ParagraphWidget updateWidgetType={this.props.updateWidgetType} deleteWidget={this.props.removeWidget} widget={widget}/>}
                         </div>
                     )
                 }
@@ -59,12 +62,25 @@ const dispatchToPropertyMapper = (dispatcher) => ({
                 type: "FIND_ALL_WIDGETS_FOR_TOPIC",
                 widgets: widgets
             })),
+    updateWidgetType: (widget) =>
+                dispatcher({
+                type: "UPDATE_WIDGET",
+                widget: widget
+            }),
     updateWidget: (widgetId, newWidget) =>
         updateWidget(widgetId, newWidget)
             .then(status => dispatcher({
                 type: "UPDATE_WIDGET",
                 widget: newWidget
             })),
+    updateAllWidgets: async (widgets) => {
+        for (let widget in widgets) {
+           const newWidget = await updateWidget(widgets[widget].id, widgets[widget])
+           await dispatcher({
+                type: "UPDATE_WIDGETS",
+                widget: widgets[widget]
+            })
+        }},
     removeWidget: (widgetId) =>
         deleteWidget(widgetId)
             .then(status => dispatcher({

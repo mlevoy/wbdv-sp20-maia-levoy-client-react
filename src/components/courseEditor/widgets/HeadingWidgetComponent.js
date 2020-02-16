@@ -5,6 +5,7 @@ class HeadingWidget extends React.Component {
        // editing: this.props.editing,
         widget: this.props.widget
     }
+
     render() {
         return (
             <div className="container-fluid border my-2 p-3">
@@ -13,9 +14,18 @@ class HeadingWidget extends React.Component {
                     <span className="col-lg-5 row justify-content-lg-end">
                         <button type="button" className="btn bg-warning mx-1"><i className="fas fa-arrow-up"/></button>
                         <button type="button" className="btn bg-warning mx-1"><i className= "fas fa-arrow-down"/></button>
-                        <select className="form-control col-4 mx-1">
-                            <option>Heading</option>
-                            <option>Paragraph</option>
+                        <select className="form-control col-4 mx-1" onChange={(e) => {
+                            const newType = e.target.value;
+                            this.setState(prevState => {
+                                prevState.widget.type = newType;
+                                return prevState
+                            },() => {
+                                this.props.updateWidgetType(this.state.widget)
+                            })
+
+                        }} value={this.state.widget.type}>
+                            <option value={"HEADING"}>Heading</option>
+                            <option value={"PARAGRAPH"}>Paragraph</option>
                         </select>
                         <button type="button" className="btn text-white bg-danger mx-1" onClick={() => this.props.deleteWidget(this.props.widget.id)}>
                             <i className = "fas fa-times"/>
@@ -29,14 +39,14 @@ class HeadingWidget extends React.Component {
                             prevState.widget.text = newText;
                             return prevState
                         })
-                    }} value={this.props.widget.text}/>
+                    }} value={this.state.widget.text}/>
                     <select className="form-control my-3" onChange={(e) => {
                         const newSize = parseInt(e.target.value);
                         this.setState(prevState => {
                             prevState.widget.size = newSize;
                             return prevState
                         })
-                    }} value={this.props.widget.size}>
+                    }} value={this.state.widget.size}>
                         <option value={1}>Heading 1</option>
                         <option value={2}>Heading 2</option>
                         <option value={3}>Heading 3</option>
@@ -50,7 +60,7 @@ class HeadingWidget extends React.Component {
                             prevState.widget.name = newName;
                             return prevState
                         })
-                    }} value={this.props.widget.name}/>
+                    }} value={this.state.widget.name}/>
                     <h4>Preview</h4>
                     {this.props.widget.size === 1 && <h1>{this.props.widget.text}</h1>}
                     {this.props.widget.size === 2 && <h2>{this.props.widget.text}</h2>}
