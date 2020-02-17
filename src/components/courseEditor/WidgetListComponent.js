@@ -13,16 +13,21 @@ import {
 class WidgetList extends React.Component {
     componentDidMount() {
         this.props.findWidgetsForTopic(this.props.topicId);
+
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.topicId !== this.props.topicId) {
             this.props.findWidgetsForTopic(this.props.topicId);
+            this.setState({
+                preview: false
+            })
         }
     }
 
     state = {
-        widgets: this.props.widgets
+        widgets: this.props.widgets,
+        preview: false
     }
     render(){
         return (
@@ -32,8 +37,12 @@ class WidgetList extends React.Component {
                         Save
                     </button>
                     <div className="custom-control btn custom-switch mx-2">
-                        <input type="checkbox" className="custom-control-input" id="toggle"/>
-                        <label className="custom-control-label" htmlFor="toggle">Preview</label>
+                        <input type="checkbox" className="custom-control-input" id="toggle"
+                               onChange={()=>this.setState({
+                                   preview: !this.state.preview
+                               })} checked={this.state.preview}/>
+                        <label className="custom-control-label" htmlFor="toggle"
+                        >Preview</label>
                     </div>
                 </div>
                 {this.props.widgets &&
@@ -50,25 +59,27 @@ class WidgetList extends React.Component {
                                 updateWidgetUI={ this.props.updateWidgetUI}
                                 deleteWidget={(id) => {this.props.removeWidget(id)
                                     this.props.updateAllWidgets(this.props.widgets)}}
-                                widget={widget}/>}
+                                widget={widget}
+                                preview = {this.state.preview}/>}
                             {widget.type === "PARAGRAPH" && <ParagraphWidget
                                 switchPosition={async (widget, moveUp) => {
                                     await this.props.switchPosition(widget, moveUp)
-                                    this.setState(prevState => {
+                                    this.setState( {
                                         widgets: this.props.widgets
                                     })
                                     }}
                                 updateWidgetUI={this.props.updateWidgetUI}
                                 deleteWidget={(id) => {this.props.removeWidget(id)
                                 this.props.updateAllWidgets(this.props.widgets)}}
-                                widget={widget}/>}
+                                widget={widget}
+                                preview = {this.state.preview}/>}
                         </div>
                     )
 
                 }
-                <button className="btn nav-link bg-danger text-white mx-2 float-right wbdv-add-widget" href="#"
+                {!this.state.preview && <button className="btn nav-link bg-danger text-white mx-2 float-right wbdv-add-widget" href="#"
                         onClick={() => this.props.createWidget(this.props.topicId, this.props.widgets.length)}>+
-                </button>
+                </button>}
             </div>
         )
     }

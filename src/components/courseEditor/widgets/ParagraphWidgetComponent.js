@@ -9,9 +9,9 @@ class ParagraphWidget extends React.Component {
     render() {
         return (
             <div className="container-fluid border p-3">
-                <div className="row form-group">
+                {!this.props.preview && <div className="row form-group">
                     <h3 className="col-lg-7">Paragraph widget</h3>
-                    <span className="col-lg-5 row justify-content-lg-end">
+                   <span className="col-lg-5 row justify-content-lg-end">
                         <button type="button" className="btn bg-warning mx-1" onClick={(e) => {
                                 this.props.switchPosition(this.state.widget, true)}}>
                             <i className="fas fa-arrow-up"/>
@@ -37,23 +37,23 @@ class ParagraphWidget extends React.Component {
                             <i className = "fas fa-times"/>
                         </button>
                     </span>
-                </div>
+                </div>}
                 <div className="form-group">
-                    <input className="form-control my-3" placeholder="Paragraph text" type="text"  onChange={(e) => {
+                    {!this.props.preview &&   <input className="form-control my-3" placeholder="Paragraph text" type="text"  onChange={(e) => {
                         const newText = e.target.value;
                         this.setState(prevState => {
                             prevState.widget.text = newText;
                             return prevState
                         })
-                    }} value={this.state.widget.text}/>
-                    <input className="form-control my-3" placeholder="Widget name" type="text"onChange={(e) => {
+                    }} value={this.state.widget.text}/>}
+                    {!this.props.preview &&   <input className="form-control my-3" placeholder="Widget name" type="text"onChange={(e) => {
                         const newName = e.target.value;
                         this.setState(prevState => {
                             prevState.widget.name = newName;
                             return prevState
                         })
-                    }} value={this.state.widget.name}/>
-                    <h4>Preview</h4>
+                    }} value={this.state.widget.name}/>}
+                    {!this.props.preview && <h4>Preview</h4>}
                     <p>{this.state.widget.text}</p>
                 </div>
             </div>
