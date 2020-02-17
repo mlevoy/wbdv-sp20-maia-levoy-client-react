@@ -8,19 +8,27 @@ class HeadingWidget extends React.Component {
 
     render() {
         return (
-            <div className="container-fluid border my-2 p-3">
+            <div className="container-fluid border p-3">
                 <div className="row form-group">
                     <h3 className="col-lg-7">Heading widget</h3>
                     <span className="col-lg-5 row justify-content-lg-end">
-                        <button type="button" className="btn bg-warning mx-1"><i className="fas fa-arrow-up"/></button>
-                        <button type="button" className="btn bg-warning mx-1"><i className= "fas fa-arrow-down"/></button>
+                        <button type="button" className="btn bg-warning mx-1" onClick={(e) => {
+                                this.props.switchPosition(this.state.widget, true)
+                                }}>
+                            <i className="fas fa-arrow-up"/>
+                        </button>
+                        <button type="button" className="btn bg-warning mx-1" onClick={(e) => {
+                                    this.props.switchPosition(this.state.widget, false)
+                                }}>
+                            <i className= "fas fa-arrow-down"/>
+                        </button>
                         <select className="form-control col-4 mx-1" onChange={(e) => {
                             const newType = e.target.value;
                             this.setState(prevState => {
                                 prevState.widget.type = newType;
                                 return prevState
                             },() => {
-                                this.props.updateWidgetType(this.state.widget)
+                                this.props.updateWidgetUI(this.state.widget)
                             })
 
                         }} value={this.state.widget.type}>
