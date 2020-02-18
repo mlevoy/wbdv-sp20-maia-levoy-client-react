@@ -1,6 +1,6 @@
 import React from "react";
-import HeadingWidget from "./widgets/HeadingWidgetComponent";
-import ParagraphWidget from "./widgets/ParagraphWidgetComponent";
+import HeadingWidget from "../../components/courseEditor/widgets/HeadingWidgetComponent";
+import ParagraphWidget from "../../components/courseEditor/widgets/ParagraphWidgetComponent";
 import {connect} from "react-redux";
 import {
     createWidget,
@@ -32,6 +32,7 @@ class WidgetList extends React.Component {
     render(){
         return (
             <div>
+                {(this.props.topicId && this.props.topics.length && this.props.widgets.length !==0) &&
                 <div className="container-fluid d-flex justify-content-end my-2 mx-2">
                     <button type="button" className="btn btn-success" onClick={() => this.props.updateAllWidgets(this.props.widgets)}>
                         Save
@@ -41,10 +42,9 @@ class WidgetList extends React.Component {
                                onChange={()=>this.setState({
                                    preview: !this.state.preview
                                })} checked={this.state.preview}/>
-                        <label className="custom-control-label" htmlFor="toggle"
-                        >Preview</label>
+                        <label className="custom-control-label" htmlFor="toggle">Preview</label>
                     </div>
-                </div>
+                </div>}
                 {this.props.widgets &&
                 this.props.widgets.map(widget =>
                         <div key={widget.id}>
@@ -77,9 +77,11 @@ class WidgetList extends React.Component {
                     )
 
                 }
-                {!this.state.preview && <button className="btn nav-link bg-danger text-white mx-2 float-right wbdv-add-widget" href="#"
+                {this.props.topicId && this.props.topics.length && <button className="btn nav-link bg-danger text-white mx-2 float-right wbdv-add-widget" href="#"
                         onClick={() => this.props.createWidget(this.props.topicId, this.props.widgets.length)}>+
                 </button>}
+                {this.props.topicId && this.props.topics.length && !this.props.widgets.length && <h5 className={"d-flex float-right justify-content-center"}>Add Widgets</h5>}
+
             </div>
         )
     }

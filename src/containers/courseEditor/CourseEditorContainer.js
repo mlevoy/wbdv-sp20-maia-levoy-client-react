@@ -1,7 +1,7 @@
 import React from "react";
 import ModuleList from "./ModuleListContainer";
 import TopicPills from "./TopicPillsContainer";
-import WidgetList from "../../components/courseEditor/WidgetListComponent";
+import WidgetList from "./WidgetListContainer";
 import {connect} from "react-redux";
 import LessonTabs from "./LessonTabsContainer";
 import {findAllCourses, findCourseById} from "../../services/CourseService"
