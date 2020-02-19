@@ -24,10 +24,10 @@ class WidgetList extends React.Component {
                 preview: false
             })
         }
+
     }
 
     state = {
-        widgets: this.props.widgets,
         preview: false
     }
     render(){
