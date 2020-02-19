@@ -14,13 +14,27 @@ export const CREATE_WIDGET = "CREATE_WIDGET"
 export const createWidget = (widget) =>
     ({
         type: CREATE_WIDGET,
-        newWidget: widget
+        widget: widget
     })
 
 
 export const UPDATE_WIDGET = "UPDATE_WIDGET"
 export const updateWidget = (widget) => ({
     type: UPDATE_WIDGET,
-    newWidget: widget,
-    widgetId: widget._id
+    widget: widget,
 })
+
+export const SWITCH_WIDGET = "SWITCH_WIDGET"
+const switchWidget = (widget, moveUp) => ({
+    type: SWITCH_WIDGET,
+    widget: widget,
+    moveUp: moveUp
+})
+
+export default {
+    updateWidget,
+    createWidget,
+    deleteWidget,
+    findWidgets,
+    switchWidget
+}

@@ -8,6 +8,7 @@ import {
     updateWidget,
     findWidgetsForTopic
 } from "../../services/WidgetService";
+import actions from "../../actions/widgetActions";
 
 
 class WidgetList extends React.Component {
@@ -92,45 +93,30 @@ const stateToPropertyMapper = (state) => ({
     topics: state.topics.topics
 })
 
-//TODO make call to actions file functions instead
 const dispatchToPropertyMapper = (dispatcher) => ({
     findWidgetsForTopic: (topicId) =>
         findWidgetsForTopic(topicId)
-            .then(widgets => dispatcher({
-                type: "FIND_ALL_WIDGETS_FOR_TOPIC",
-                widgets: widgets
-            })),
+            .then(widgets => dispatcher(actions.findWidgets(widgets))),
     updateWidgetUI: (widget) =>
-                dispatcher({
-                type: "UPDATE_WIDGET",
-                widget: widget
-            }),
-    switchPosition: (widget, moveUp) =>
-        dispatcher({
-            type: "SWITCH_WIDGET",
-            widget: widget,
-            moveUp: moveUp
-        }),
+                dispatcher(actions.updateWidget(widget)),
     updateWidget: (widgetId, newWidget) =>
         updateWidget(widgetId, newWidget)
-            .then(status => dispatcher({
-                type: "UPDATE_WIDGET",
-                widget: newWidget
-            })),
+            .then(status => dispatcher(actions.updateWidget())),
     updateAllWidgets: async (widgets) => {
         for (let widget in widgets) {
-           const newWidget = await updateWidget(widgets[widget].id, widgets[widget])
-           await dispatcher({
+            const newWidget = await updateWidget(widgets[widget].id, widgets[widget])
+            await dispatcher({
                 type: "UPDATE_WIDGETS",
                 widget: widgets[widget]
             })
         }},
+    switchPosition: (widget, moveUp) =>
+        dispatcher(actions.switchWidget(widget, moveUp)),
+
     removeWidget: (widgetId) =>
         deleteWidget(widgetId)
-            .then(status => dispatcher({
-                type: 'DELETE_WIDGET',
-                widgetId: widgetId
-            })),
+            .then(status => dispatcher(actions.deleteWidget(widgetId)
+            )),
     createWidget: (topicId, order) =>
         createWidget({
             type: "HEADING",
@@ -138,11 +124,7 @@ const dispatchToPropertyMapper = (dispatcher) => ({
             id: (new Date()).getTime() + "",
             order: order,
             topicId: topicId
-        })
-            .then(actualWidget => dispatcher({
-                type: "CREATE_WIDGET",
-                widget: actualWidget
-            }))
+        }).then(actualWidget => dispatcher(actions.createWidget(actualWidget)))
 })
 
 export default connect (stateToPropertyMapper, dispatchToPropertyMapper)(WidgetList)

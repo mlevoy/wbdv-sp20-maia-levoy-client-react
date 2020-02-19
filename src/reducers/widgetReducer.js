@@ -1,4 +1,10 @@
-import {CREATE_WIDGET, DELETE_WIDGET, FIND_ALL_WIDGETS_FOR_TOPIC, UPDATE_WIDGET} from "../actions/widgetActions";
+import {
+    CREATE_WIDGET,
+    DELETE_WIDGET,
+    FIND_ALL_WIDGETS_FOR_TOPIC,
+    SWITCH_WIDGET,
+    UPDATE_WIDGET
+} from "../actions/widgetActions";
 
 const widgetReducer = (state= {widgets: []}, action) => {
     switch (action.type) {
@@ -30,7 +36,7 @@ const widgetReducer = (state= {widgets: []}, action) => {
                     widget.id === action.widget.id ? action.widget : widget
                 )
             }
-        case "SWITCH_WIDGET":
+        case SWITCH_WIDGET:
 
            function swap(list, i , j) {
                let tmp = list[i]
