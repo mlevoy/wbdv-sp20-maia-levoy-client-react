@@ -1,7 +1,7 @@
 import {WIDGET_API} from "../common/constants.js";
 
 export const findWidgetsForTopic = (topicId) =>
-    fetch(`http://localhost:8080/topics/${topicId}/widgets/`)
+    fetch(`http://ancient-fortress-94710.herokuapp.com/topics/${topicId}/widgets/`)
         .then(response => response.json())
 
 export const updateWidget = (wid, widget) =>
