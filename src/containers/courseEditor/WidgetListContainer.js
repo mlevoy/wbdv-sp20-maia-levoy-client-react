@@ -51,6 +51,7 @@ class WidgetList extends React.Component {
                         <div key={widget.id}>
                             {widget.type === "HEADING" &&
                             <HeadingWidget
+                                widgets = {this.props.widgets}
                                 switchPosition={async (widget, moveUp) => {
                                     await this.props.switchPosition(widget, moveUp)
                                     this.setState({
@@ -73,7 +74,9 @@ class WidgetList extends React.Component {
                                 deleteWidget={(id) => {this.props.removeWidget(id)
                                 this.props.updateAllWidgets(this.props.widgets)}}
                                 widget={widget}
-                                preview = {this.state.preview}/>}
+                                preview = {this.state.preview}
+                                widgets = {this.props.widgets}/>
+                            }
                         </div>
                     )
 

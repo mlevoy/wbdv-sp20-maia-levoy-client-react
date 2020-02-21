@@ -12,16 +12,16 @@ class HeadingWidget extends React.Component {
                 {!this.props.preview &&  <div className="row form-group">
                     <h3 className="col-lg-7">Heading widget</h3>
                     <span className="col-lg-5 row justify-content-lg-end">
-                        <button type="button" className="btn bg-warning mx-1" onClick={(e) => {
+                    {this.props.widget.order !== 0 &&    <button type="button" className="btn bg-warning mx-1" onClick={(e) => {
                                 this.props.switchPosition(this.state.widget, true)
                                 }}>
                             <i className="fas fa-arrow-up"/>
-                        </button>
-                        <button type="button" className="btn bg-warning mx-1" onClick={(e) => {
+                        </button>}
+                        {this.props.widget.order !== (this.props.widgets.length -1) &&  <button type="button" className="btn bg-warning mx-1" onClick={(e) => {
                                     this.props.switchPosition(this.state.widget, false)
                                 }}>
                             <i className= "fas fa-arrow-down"/>
-                        </button>
+                        </button>}
                         <select className="form-control col-4 mx-1" onChange={(e) => {
                             const newType = e.target.value;
                             this.setState(prevState => {
