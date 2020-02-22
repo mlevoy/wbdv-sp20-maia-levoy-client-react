@@ -12,7 +12,7 @@ class HeadingWidget extends React.Component {
                 {!this.props.preview &&  <div className="row form-group">
                     <h3 className="col-lg-7">Heading widget</h3>
                     <span className="col-lg-5 row justify-content-lg-end">
-                    {this.props.widget.order !== 0 &&    <button type="button" className="btn bg-warning mx-1" onClick={(e) => {
+                    {this.props.widget.order !== 0 && <button type="button" className="btn bg-warning mx-1" onClick={(e) => {
                                 this.props.switchPosition(this.state.widget, true)
                                 }}>
                             <i className="fas fa-arrow-up"/>
@@ -35,7 +35,7 @@ class HeadingWidget extends React.Component {
                             <option value={"HEADING"}>Heading</option>
                             <option value={"PARAGRAPH"}>Paragraph</option>
                         </select>
-                        <button type="button" className="btn text-white bg-danger mx-1" onClick={() => this.props.deleteWidget(this.props.widget.id)}>
+                        <button type="button" className="btn text-white bg-danger mx-1" onClick={() => this.props.deleteWidget(this.props.widget)}>
                             <i className = "fas fa-times"/>
                         </button>
                     </span>

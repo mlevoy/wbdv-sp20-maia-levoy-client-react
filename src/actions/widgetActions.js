@@ -5,9 +5,9 @@ export const findWidgets = (widgets) => ({
 })
 
 export const DELETE_WIDGET = "DELETE_WIDGET"
-export const deleteWidget = (widgetId) => ({
+export const deleteWidget = (widget) => ({
     type: DELETE_WIDGET,
-    widgetId: widgetId
+    widget: widget
 })
 
 export const CREATE_WIDGET = "CREATE_WIDGET"

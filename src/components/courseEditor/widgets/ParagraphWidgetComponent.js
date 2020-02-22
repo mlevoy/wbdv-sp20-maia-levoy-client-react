@@ -33,7 +33,7 @@ class ParagraphWidget extends React.Component {
                             <option value={"HEADING"}>Heading</option>
                             <option value={"PARAGRAPH"}>Paragraph</option>
                         </select>
-                        <button type="button" className="btn text-white bg-danger mx-1" onClick={() => this.props.deleteWidget(this.props.widget.id)}>
+                        <button type="button" className="btn text-white bg-danger mx-1" onClick={() => this.props.deleteWidget(this.props.widget)}>
                             <i className = "fas fa-times"/>
                         </button>
                     </span>

@@ -59,7 +59,7 @@ class WidgetList extends React.Component {
                                     })
                                 }}
                                 updateWidgetUI={ this.props.updateWidgetUI}
-                                deleteWidget={(id) => {this.props.removeWidget(id)
+                                deleteWidget={(widget) => {this.props.removeWidget(widget)
                                     this.props.updateAllWidgets(this.props.widgets)}}
                                 widget={widget}
                                 preview = {this.state.preview}/>}
@@ -71,7 +71,7 @@ class WidgetList extends React.Component {
                                     })
                                     }}
                                 updateWidgetUI={this.props.updateWidgetUI}
-                                deleteWidget={(id) => {this.props.removeWidget(id)
+                                deleteWidget={(widget) => {this.props.removeWidget(widget)
                                 this.props.updateAllWidgets(this.props.widgets)}}
                                 widget={widget}
                                 preview = {this.state.preview}
@@ -116,9 +116,9 @@ const dispatchToPropertyMapper = (dispatcher) => ({
     switchPosition: (widget, moveUp) =>
         dispatcher(actions.switchWidget(widget, moveUp)),
 
-    removeWidget: (widgetId) =>
-        deleteWidget(widgetId)
-            .then(status => dispatcher(actions.deleteWidget(widgetId)
+    removeWidget: (widget) =>
+        deleteWidget(widget.id)
+            .then(status => dispatcher(actions.deleteWidget(widget)
             )),
     createWidget: (topicId, order) =>
         createWidget({

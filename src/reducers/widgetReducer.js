@@ -21,9 +21,9 @@ const widgetReducer = (state= {widgets: []}, action) => {
                 ]
             }
         case DELETE_WIDGET:
-            let widgets = state.widgets.filter(widget => widget.id !== action.widgetId)
+            let widgets = state.widgets.filter(widget => widget.id !== action.widget.id)
             for (let i = 0; i < widgets.length; i++){
-                if(widgets[i].order >= widgets.length){
+                if(widgets[i].order > action.widget.order){
                     widgets[i].order = widgets[i].order -1;
                 }
             }
