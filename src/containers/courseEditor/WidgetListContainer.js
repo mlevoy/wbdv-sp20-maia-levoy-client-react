@@ -13,12 +13,15 @@ import actions from "../../actions/widgetActions";
 
 class WidgetList extends React.Component {
     componentDidMount() {
-        this.props.findWidgetsForTopic(this.props.topicId);
+       if (this.props.topicId) {
+           this.props.findWidgetsForTopic(this.props.topicId);
+       }
 
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.topicId !== this.props.topicId) {
+            // console.log("change")
             this.props.findWidgetsForTopic(this.props.topicId);
             this.setState({
                 preview: false
@@ -85,7 +88,6 @@ class WidgetList extends React.Component {
                         onClick={() => this.props.createWidget(this.props.topicId, this.props.widgets.length)}>+
                 </button>}
                 {this.props.topicId && this.props.topics.length && !this.props.widgets.length && <h5 className={"d-flex float-right justify-content-center"}>Add Widgets</h5>}
-
             </div>
         )
     }
@@ -120,14 +122,12 @@ const dispatchToPropertyMapper = (dispatcher) => ({
         deleteWidget(widget.id)
             .then(status => dispatcher(actions.deleteWidget(widget)
             )),
-    createWidget: (topicId, order) =>
-        createWidget({
+    createWidget: (topicId, placement) =>
+        createWidget(topicId, {
             type: "HEADING",
             size: 1,
-            id: (new Date()).getTime() + "",
-            order: order,
-            topicId: topicId
+            placement: placement
         }).then(actualWidget => dispatcher(actions.createWidget(actualWidget)))
 })
 
-export default connect (stateToPropertyMapper, dispatchToPropertyMapper)(WidgetList)
+export default connect(stateToPropertyMapper, dispatchToPropertyMapper)(WidgetList)

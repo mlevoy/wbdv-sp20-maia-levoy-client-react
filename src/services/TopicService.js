@@ -1,18 +1,18 @@
-import {NONCOURSE_API} from "../common/constants";
+import {MY_SERVER_API} from "../common/constants";
 
 export const findTopicsForLesson = (lessonId) =>
-    fetch(`${NONCOURSE_API}/lessons/${lessonId}/topics`)
+    fetch(`${MY_SERVER_API}lessons/${lessonId}/topics`)
         .then(response => response.json())
 
 
 export const deleteTopic = (topicId) =>
-    fetch(`${NONCOURSE_API}/topics/${topicId}`, {
+    fetch(`${MY_SERVER_API}topics/${topicId}`, {
         method: "DELETE"
     })
         .then(response => response.json())
 
 export const updateTopic = async (topicId, topic) => {
-    const response = await fetch(`${NONCOURSE_API}/topics/${topicId}`, {
+    const response = await fetch(`${MY_SERVER_API}topics/${topicId}`, {
         method: 'PUT',
         body: JSON.stringify(topic),
         headers: {
@@ -24,7 +24,7 @@ export const updateTopic = async (topicId, topic) => {
 
 export const createTopic = async (lessonId, topic) =>
 {
-    const response = await fetch(`${NONCOURSE_API}/lessons/${lessonId}/topics`, {
+    const response = await fetch(`${MY_SERVER_API}lessons/${lessonId}/topics`, {
         method: "POST",
         body: JSON.stringify(topic),
         headers: {

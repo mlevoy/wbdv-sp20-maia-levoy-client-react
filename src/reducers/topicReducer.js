@@ -12,12 +12,12 @@ const topicReducer = (state = {topics: []}, action) => {
         case DELETE_TOPIC:
             return {
                 topics: state.topics.filter(
-                    topic => topic._id !== action.topicId)
+                    topic => topic.id !== action.topicId)
             }
         case UPDATE_TOPIC:
             return {
                 topics: state.topics.map(topic =>
-                    topic._id === action.topicId ? action.newTopic : topic
+                    topic.id === action.topicId ? action.newTopic : topic
                 )
             }
         case FIND_TOPICS_FOR_LESSON:

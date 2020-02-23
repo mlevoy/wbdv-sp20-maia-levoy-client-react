@@ -13,7 +13,7 @@ const widgetReducer = (state= {widgets: []}, action) => {
                 widgets: action.widgets
             }
         case CREATE_WIDGET:
-            action.widget.order = state.widgets.length
+            action.widget.placement = state.widgets.length
             return {
                 widgets: [
                     ...state.widgets,
@@ -23,8 +23,8 @@ const widgetReducer = (state= {widgets: []}, action) => {
         case DELETE_WIDGET:
             let widgets = state.widgets.filter(widget => widget.id !== action.widget.id)
             for (let i = 0; i < widgets.length; i++){
-                if(widgets[i].order > action.widget.order){
-                    widgets[i].order = widgets[i].order -1;
+                if(widgets[i].placement > action.widget.placement){
+                    widgets[i].placement = widgets[i].placement -1;
                 }
             }
             return {
@@ -43,9 +43,9 @@ const widgetReducer = (state= {widgets: []}, action) => {
                list[i] = list[j]
                list[j] = tmp;
 
-               tmp = list[i].order
-               list[i].order = list[j].order;
-               list[j].order = tmp;
+               tmp = list[i].placement
+               list[i].placement = list[j].placement;
+               list[j].placement = tmp;
            }
            function getSwapIndex(list, id) {
             for   (var index = 0; index < state.widgets.length; index++) {

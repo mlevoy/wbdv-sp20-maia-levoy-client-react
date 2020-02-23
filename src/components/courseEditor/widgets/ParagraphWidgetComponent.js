@@ -12,11 +12,11 @@ class ParagraphWidget extends React.Component {
                 {!this.props.preview && <div className="row form-group">
                     <h3 className="col-lg-7">Paragraph widget</h3>
                    <span className="col-lg-5 row justify-content-lg-end">
-                       {this.props.widget.order !== 0 && <button type="button" className="btn bg-warning mx-1" onClick={(e) => {
+                       {this.props.widget.placement !== 0 && <button type="button" className="btn bg-warning mx-1" onClick={(e) => {
                                 this.props.switchPosition(this.state.widget, true)}}>
                             <i className="fas fa-arrow-up"/>
                         </button>}
-                       {this.props.widget.order !== (this.props.widgets.length -1) && <button type="button" className="btn bg-warning mx-1"onClick={(e) => {
+                       {this.props.widget.placement !== (this.props.widgets.length -1) && <button type="button" className="btn bg-warning mx-1"onClick={(e) => {
                                 this.props.switchPosition(this.state.widget, false)
                                 }}>
                             <i className= "fas fa-arrow-down"/>

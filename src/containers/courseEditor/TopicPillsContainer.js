@@ -37,19 +37,19 @@ class TopicPills extends React.Component {
                 <ul className="nav nav-pills wbdv-topic-pill-list my-2 mx-4 flex-column flex-sm-row">
                     {this.props.topics && this.props.topics.map(topic =>
                         <TopicPillsItem
-                            key={topic._id}
+                            key={topic.id}
                             history={this.props.history}
                             edit={() => {
-                                const topicId = topic._id
+                                const topicId = topic.id
                                 const lessonId = this.props.lessonId
                                 this.props.history.push(`/course-editor/${this.props.courseId}/lesson/${lessonId}/topic/${topicId}`)
                                 this.setState({
-                                    editingTopicId: topic._id,
+                                    editingTopicId: topic.id,
                                     topicToChange: topic
                                 })
                             }}
                             select={() => {
-                                const topicId = topic._id
+                                const topicId = topic.id
                                 const lessonId = this.props.lessonId
                                 const moduleId = this.props.moduleId
                                 this.props.history.push(`/course-editor/${this.props.courseId}/module/${moduleId}/lesson/${lessonId}/topic/${topicId}`
@@ -74,8 +74,8 @@ class TopicPills extends React.Component {
                                     }
                                 })
                             }}
-                            editing={topic._id === this.state.editingTopicId}
-                            active={topic._id === this.state.activeTopicId}
+                            editing={topic.id === this.state.editingTopicId}
+                            active={topic.id === this.state.activeTopicId}
                             topic={topic}
                             topicToChange={this.state.topicToChange}
                             removeTopic={async (id) => {
@@ -120,7 +120,7 @@ const dispatchToPropertyMapper = (dispatch) => {
             topicService.findTopicsForLesson(lessonId).then(topics =>
                 dispatch(findTopics(topics))),
         editTopic: async (topic) => {
-            const status = await topicService.updateTopic(topic._id, topic)
+            const status = await topicService.updateTopic(topic.id, topic)
             dispatch(updateTopic(topic))
         },
         removeTopic: (topicId) =>

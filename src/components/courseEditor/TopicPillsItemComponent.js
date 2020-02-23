@@ -21,7 +21,7 @@ const TopicPillsItem = ({topicToChange, save, edit, editing, topic, removeTopic,
                     }
                  />
             <i className="btn d-inline wbdv-row wbdv-button wbdv-delete fas fa fa-times text-white"
-               onClick={() => removeTopic(topic._id)}/>
+               onClick={() => removeTopic(topic.id)}/>
             </span>}
                 </a>
             </li>

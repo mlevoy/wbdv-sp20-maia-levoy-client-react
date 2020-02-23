@@ -1,7 +1,7 @@
-import {WIDGET_API} from "../common/constants.js";
+import {WIDGET_API, MY_SERVER_API} from "../common/constants.js";
 
 export const findWidgetsForTopic = (topicId) =>
-    fetch(`https://ancient-fortress-94710.herokuapp.com/topics/${topicId}/widgets/`)
+    fetch(`${MY_SERVER_API}topics/${topicId}/widgets/`)
         .then(response => response.json())
 
 export const updateWidget = (wid, widget) =>
@@ -18,8 +18,8 @@ export const deleteWidget = (widgetId) =>
         method: "DELETE"
     }).then(response => response.json())
 
-export const createWidget = (widget) =>
-    fetch(`${WIDGET_API}`, {
+export const createWidget = (tid, widget) =>
+    fetch(`${MY_SERVER_API}topics/${tid}/widgets/`, {
         method: "POST",
         body: JSON.stringify(widget),
         headers: {
