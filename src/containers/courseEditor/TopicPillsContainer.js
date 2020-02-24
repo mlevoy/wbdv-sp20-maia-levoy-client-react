@@ -53,12 +53,11 @@ class TopicPills extends React.Component {
                                 const lessonId = this.props.lessonId
                                 const moduleId = this.props.moduleId
                                 this.props.history.push(`/course-editor/${this.props.courseId}/module/${moduleId}/lesson/${lessonId}/topic/${topicId}`
-
-                                // ${lessonId}${topicId ?"/topic/"+topicId:"ASDF" }`
-                                  )//
+                                  )
                                 this.setState({
                                     activeTopicId: topicId
                                 })
+
                             }}
                             save={() => {
                                 this.setState({

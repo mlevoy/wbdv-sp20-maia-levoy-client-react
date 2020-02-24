@@ -1,6 +1,7 @@
 import React from "react";
 import HeadingWidget from "../../components/courseEditor/widgets/HeadingWidgetComponent";
 import ParagraphWidget from "../../components/courseEditor/widgets/ParagraphWidgetComponent";
+import ListWidget from "../../components/courseEditor/widgets/ListWidgetComponent"
 import {connect} from "react-redux";
 import {
     createWidget,
@@ -67,15 +68,29 @@ class WidgetList extends React.Component {
                                 widget={widget}
                                 preview = {this.state.preview}/>}
                             {widget.type === "PARAGRAPH" && <ParagraphWidget
+                            switchPosition={async (widget, moveUp) => {
+                                await this.props.switchPosition(widget, moveUp)
+                                this.setState( {
+                                    widgets: this.props.widgets
+                                })
+                            }}
+                            updateWidgetUI={this.props.updateWidgetUI}
+                            deleteWidget={(widget) => {this.props.removeWidget(widget)
+                                this.props.updateAllWidgets(this.props.widgets)}}
+                            widget={widget}
+                            preview = {this.state.preview}
+                            widgets = {this.props.widgets}/>
+                        }
+                            {widget.type === "LIST" && <ListWidget
                                 switchPosition={async (widget, moveUp) => {
                                     await this.props.switchPosition(widget, moveUp)
                                     this.setState( {
                                         widgets: this.props.widgets
                                     })
-                                    }}
+                                }}
                                 updateWidgetUI={this.props.updateWidgetUI}
                                 deleteWidget={(widget) => {this.props.removeWidget(widget)
-                                this.props.updateAllWidgets(this.props.widgets)}}
+                                    this.props.updateAllWidgets(this.props.widgets)}}
                                 widget={widget}
                                 preview = {this.state.preview}
                                 widgets = {this.props.widgets}/>
@@ -126,7 +141,8 @@ const dispatchToPropertyMapper = (dispatcher) => ({
         createWidget(topicId, {
             type: "HEADING",
             size: 1,
-            placement: placement
+            placement: placement,
+            style: ""
         }).then(actualWidget => dispatcher(actions.createWidget(actualWidget)))
 })
 
