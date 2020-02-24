@@ -2,6 +2,7 @@ import React from "react";
 import HeadingWidget from "../../components/courseEditor/widgets/HeadingWidgetComponent";
 import ParagraphWidget from "../../components/courseEditor/widgets/ParagraphWidgetComponent";
 import ListWidget from "../../components/courseEditor/widgets/ListWidgetComponent"
+import ImageWidget from "../../components/courseEditor/widgets/ImageWidgetComponent";
 import {connect} from "react-redux";
 import {
     createWidget,
@@ -82,6 +83,20 @@ class WidgetList extends React.Component {
                             widgets = {this.props.widgets}/>
                         }
                             {widget.type === "LIST" && <ListWidget
+                                switchPosition={async (widget, moveUp) => {
+                                    await this.props.switchPosition(widget, moveUp)
+                                    this.setState( {
+                                        widgets: this.props.widgets
+                                    })
+                                }}
+                                updateWidgetUI={this.props.updateWidgetUI}
+                                deleteWidget={(widget) => {this.props.removeWidget(widget)
+                                    this.props.updateAllWidgets(this.props.widgets)}}
+                                widget={widget}
+                                preview = {this.state.preview}
+                                widgets = {this.props.widgets}/>
+                            }
+                            {widget.type === "IMAGE" && <ImageWidget
                                 switchPosition={async (widget, moveUp) => {
                                     await this.props.switchPosition(widget, moveUp)
                                     this.setState( {

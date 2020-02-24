@@ -41,7 +41,7 @@ class ParagraphWidget extends React.Component {
                     </span>
                 </div>}
                 <div className="form-group">
-                    {!this.props.preview &&   <textarea className="form-control my-3" placeholder="Paragraph text" type="text"  onChange={(e) => {
+                    {!this.props.preview &&   <textarea rows= '4' className="form-control my-3" placeholder="Paragraph text" type="text"  onChange={(e) => {
                         const newText = e.target.value;
                         this.setState(prevState => {
                             prevState.widget.text = newText;
@@ -56,7 +56,7 @@ class ParagraphWidget extends React.Component {
                         })
                     }} value={this.state.widget.name}/>}
                     {!this.props.preview && <h4>Preview</h4>}
-                    <p>{this.state.widget.text}</p>
+                    <p>{this.props.widget.text}</p>
                 </div>
             </div>
         )
