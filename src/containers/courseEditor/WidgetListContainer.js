@@ -15,21 +15,16 @@ import actions from "../../actions/widgetActions";
 
 class WidgetList extends React.Component {
     componentDidMount() {
-       if (this.props.topicId) {
-           this.props.findWidgetsForTopic(this.props.topicId);
-       }
-
+        this.props.findWidgetsForTopic(this.props.topicId);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.topicId !== this.props.topicId) {
-            // console.log("change")
             this.props.findWidgetsForTopic(this.props.topicId);
             this.setState({
                 preview: false
             })
         }
-
     }
 
     state = {
@@ -51,7 +46,7 @@ class WidgetList extends React.Component {
                         <label className="custom-control-label" htmlFor="toggle">Preview</label>
                     </div>
                 </div>}
-                {this.props.widgets &&
+                {
                 this.props.widgets.map(widget =>
                         <div key={widget.id}>
                             {widget.type === "HEADING" &&
@@ -129,9 +124,13 @@ const stateToPropertyMapper = (state) => ({
 })
 
 const dispatchToPropertyMapper = (dispatcher) => ({
-    findWidgetsForTopic: (topicId) =>
+    findWidgetsForTopic: (topicId) => {
+        if(!topicId){
+            dispatcher(actions.findWidgets([]))
+        }
+        else{
         findWidgetsForTopic(topicId)
-            .then(widgets => dispatcher(actions.findWidgets(widgets))),
+            .then(widgets => dispatcher(actions.findWidgets(widgets)))}},
     updateWidgetUI: (widget) =>
                 dispatcher(actions.updateWidget(widget)),
     updateWidget: (widgetId, newWidget) =>
@@ -157,7 +156,7 @@ const dispatchToPropertyMapper = (dispatcher) => ({
             type: "HEADING",
             size: 1,
             placement: placement,
-            style: ""
+            style: "",
         }).then(actualWidget => dispatcher(actions.createWidget(actualWidget)))
 })
 

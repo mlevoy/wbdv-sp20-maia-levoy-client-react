@@ -68,12 +68,12 @@ class ListWidget extends React.Component {
                         })
                     }} value={this.state.widget.name}/>}
                     {!this.props.preview && <h4>Preview</h4>}
-                    {(this.props.widget.style === "UNORDERED" || this.props.widget.style === "") && <ul>
+                    {(this.props.widget.style === "UNORDERED" || this.props.widget.style === "") && <ul className="text-wrap">
                         {this.props.widget.text &&
                          this.props.widget.text.split('\n').map((line,i) => {return <li key={i}>{line}</li>
                         })}
                     </ul>}
-                    {this.props.widget.style === "ORDERED" && <ol>{this.props.widget.text &&
+                    {this.props.widget.style === "ORDERED" && <ol className="text-wrap">{this.props.widget.text &&
                     this.props.widget.text.split('\n').map((line,i) => {return <li key={i}>{line}</li>
                     })}
                     </ol>}

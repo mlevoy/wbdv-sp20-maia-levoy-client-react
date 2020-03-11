@@ -138,8 +138,11 @@ class CourseManagerContainer extends React.Component {
                         exact={true}
                         render={(props) =>
                             <CourseEditor
+                                {...props}
+                                lessonId={props.match.params.lessonId}
+                                moduleId={props.match.params.moduleId}
                                 courseId={props.match.params.courseId}
-                                {...props}/>
+                                topicId={props.match.params.topicId}/>
                         }/>
                     <Route
                         path="/course-editor/:courseId/module/:moduleId"
@@ -147,8 +150,10 @@ class CourseManagerContainer extends React.Component {
                         render={(props) =>
                             <CourseEditor
                                 {...props}
+                                lessonId={props.match.params.lessonId}
                                 moduleId={props.match.params.moduleId}
-                                courseId={props.match.params.courseId}/>
+                                courseId={props.match.params.courseId}
+                                topicId={props.match.params.topicId}/>
                         }/>
                     <Route
                         path="/course-editor/:courseId/module/:moduleId/lesson/:lessonId"
@@ -158,7 +163,8 @@ class CourseManagerContainer extends React.Component {
                                 {...props}
                                 lessonId={props.match.params.lessonId}
                                 moduleId={props.match.params.moduleId}
-                                courseId={props.match.params.courseId}/>
+                                courseId={props.match.params.courseId}
+                                topicId={props.match.params.topicId}/>
                         }/>
                     <Route
                         path="/course-editor/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId"

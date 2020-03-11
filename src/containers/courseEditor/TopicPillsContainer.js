@@ -26,7 +26,7 @@ class TopicPills extends React.Component {
 
     state = {
         topicToChange: '',
-        activeTopicId: this.props.topicId,
+        activeTopicId: this.props.topicId === 'undefined'? {} :this.props.topicId,
         editingTopicId: '',
     }
 
@@ -48,13 +48,13 @@ class TopicPills extends React.Component {
                                     topicToChange: topic
                                 })
                             }}
-                            select={() => {
+                            select={async ()  => {
                                 const topicId = topic.id
                                 const lessonId = this.props.lessonId
                                 const moduleId = this.props.moduleId
-                                this.props.history.push(`/course-editor/${this.props.courseId}/module/${moduleId}/lesson/${lessonId}/topic/${topicId}`
+                                await this.props.history.push(`/course-editor/${this.props.courseId}/module/${moduleId}/lesson/${lessonId}/topic/${topicId}`
                                   )
-                                this.setState({
+                                this.mounted && this.setState({
                                     activeTopicId: topicId
                                 })
 
@@ -74,7 +74,7 @@ class TopicPills extends React.Component {
                                 })
                             }}
                             editing={topic.id === this.state.editingTopicId}
-                            active={topic.id === this.state.activeTopicId}
+                            active={parseInt(this.state.activeTopicId) === parseInt(topic.id)}
                             topic={topic}
                             topicToChange={this.state.topicToChange}
                             removeTopic={async (id) => {

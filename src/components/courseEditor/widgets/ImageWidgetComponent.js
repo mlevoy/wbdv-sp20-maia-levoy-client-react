@@ -46,7 +46,7 @@ class ImageWidget extends React.Component {
                             prevState.widget.resource = newURL;
                             return prevState
                         })
-                    }} value={this.state.widget.resource}/>}
+                    }} value={this.state.widget.resource? this.state.widget.resource : ""}/>}
                     {!this.props.preview &&   <input className="form-control my-3" placeholder="Widget name" type="text"onChange={(e) => {
                         const newName = e.target.value;
                         this.setState(prevState => {
@@ -55,7 +55,7 @@ class ImageWidget extends React.Component {
                         })
                     }} value={this.state.widget.name}/>}
                     {!this.props.preview && <h4>Preview</h4>}
-                    <img src={this.props.widget.resource}/>
+                    <img className={"img-fluid"} src={this.props.widget.resource}/>
                 </div>
             </div>
         )
