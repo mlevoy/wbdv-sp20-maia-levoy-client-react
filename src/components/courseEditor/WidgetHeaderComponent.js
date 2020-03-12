@@ -1,5 +1,6 @@
 import React from "react"
 
+//Component for each widget header including the header title, positional arrow buttons, widget type dropdown, and delete button
 const WidgetHeader = ({preview, widget, switchPosition, updateWidgetUI, widgets, deleteWidget}) => {
 
     return (

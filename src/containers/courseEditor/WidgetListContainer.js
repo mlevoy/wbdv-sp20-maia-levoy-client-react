@@ -31,6 +31,70 @@ class WidgetList extends React.Component {
     state = {
         preview: false
     }
+
+    //render widget based on the widget type
+    renderWidget(widget){
+        switch(widget.type) {
+            case 'HEADING':
+                return <HeadingWidget
+                    widgets = {this.props.widgets}
+                    switchPosition={async (widget, moveUp) => {
+                        await this.props.switchPosition(widget, moveUp)
+                        this.setState({
+                            widgets: this.props.widgets
+                        })
+                    }}
+                    updateWidgetUI={this.props.updateWidgetUI}
+                    deleteWidget={(widget) => {this.props.removeWidget(widget)
+                        this.props.updateAllWidgets(this.props.widgets)}}
+                    widget={widget}
+                    preview = {this.state.preview}/>;
+            case 'PARAGRAPH':
+                return <ParagraphWidget
+                    switchPosition={async (widget, moveUp) => {
+                        await this.props.switchPosition(widget, moveUp)
+                        this.setState( {
+                            widgets: this.props.widgets
+                        })
+                    }}
+                    updateWidgetUI={this.props.updateWidgetUI}
+                    deleteWidget={(widget) => {this.props.removeWidget(widget)
+                        this.props.updateAllWidgets(this.props.widgets)}}
+                    widget={widget}
+                    preview = {this.state.preview}
+                    widgets = {this.props.widgets}/>;
+            case 'LIST':
+                return <ListWidget
+                    switchPosition={async (widget, moveUp) => {
+                        await this.props.switchPosition(widget, moveUp)
+                        this.setState( {
+                            widgets: this.props.widgets
+                        })
+                    }}
+                    updateWidgetUI={this.props.updateWidgetUI}
+                    deleteWidget={(widget) => {this.props.removeWidget(widget)
+                        this.props.updateAllWidgets(this.props.widgets)}}
+                    widget={widget}
+                    preview = {this.state.preview}
+                    widgets = {this.props.widgets}/>;
+            case 'IMAGE':
+                return <ImageWidget
+                        switchPosition={async (widget, moveUp) => {
+                            await this.props.switchPosition(widget, moveUp)
+                            this.setState( {
+                                widgets: this.props.widgets
+                            })
+                        }}
+                        updateWidgetUI={this.props.updateWidgetUI}
+                        deleteWidget={(widget) => {this.props.removeWidget(widget)
+                            this.props.updateAllWidgets(this.props.widgets)}}
+                        widget={widget}
+                        preview = {this.state.preview}
+                        widgets = {this.props.widgets}/>;
+                default:
+                return '';
+        }
+    }
     render(){
         return (
             <div>
@@ -64,62 +128,7 @@ class WidgetList extends React.Component {
                                     this.props.updateAllWidgets(this.props.widgets)}}
                                 widgets = {this.props.widgets}
                             />
-                            {widget.type === "HEADING" &&
-                            <HeadingWidget
-                                widgets = {this.props.widgets}
-                                switchPosition={async (widget, moveUp) => {
-                                    await this.props.switchPosition(widget, moveUp)
-                                    this.setState({
-                                        widgets: this.props.widgets
-                                    })
-                                }}
-                                updateWidgetUI={this.props.updateWidgetUI}
-                                deleteWidget={(widget) => {this.props.removeWidget(widget)
-                                    this.props.updateAllWidgets(this.props.widgets)}}
-                                widget={widget}
-                                preview = {this.state.preview}/>}
-                            {widget.type === "PARAGRAPH" && <ParagraphWidget
-                            switchPosition={async (widget, moveUp) => {
-                                await this.props.switchPosition(widget, moveUp)
-                                this.setState( {
-                                    widgets: this.props.widgets
-                                })
-                            }}
-                            updateWidgetUI={this.props.updateWidgetUI}
-                            deleteWidget={(widget) => {this.props.removeWidget(widget)
-                                this.props.updateAllWidgets(this.props.widgets)}}
-                            widget={widget}
-                            preview = {this.state.preview}
-                            widgets = {this.props.widgets}/>
-                        }
-                            {widget.type === "LIST" && <ListWidget
-                                switchPosition={async (widget, moveUp) => {
-                                    await this.props.switchPosition(widget, moveUp)
-                                    this.setState( {
-                                        widgets: this.props.widgets
-                                    })
-                                }}
-                                updateWidgetUI={this.props.updateWidgetUI}
-                                deleteWidget={(widget) => {this.props.removeWidget(widget)
-                                    this.props.updateAllWidgets(this.props.widgets)}}
-                                widget={widget}
-                                preview = {this.state.preview}
-                                widgets = {this.props.widgets}/>
-                            }
-                            {widget.type === "IMAGE" && <ImageWidget
-                                switchPosition={async (widget, moveUp) => {
-                                    await this.props.switchPosition(widget, moveUp)
-                                    this.setState( {
-                                        widgets: this.props.widgets
-                                    })
-                                }}
-                                updateWidgetUI={this.props.updateWidgetUI}
-                                deleteWidget={(widget) => {this.props.removeWidget(widget)
-                                    this.props.updateAllWidgets(this.props.widgets)}}
-                                widget={widget}
-                                preview = {this.state.preview}
-                                widgets = {this.props.widgets}/>
-                            }
+                            {this.renderWidget(widget)}
                         </div>
                     )
 
