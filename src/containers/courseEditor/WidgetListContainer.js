@@ -3,6 +3,7 @@ import HeadingWidget from "../../components/courseEditor/widgets/HeadingWidgetCo
 import ParagraphWidget from "../../components/courseEditor/widgets/ParagraphWidgetComponent";
 import ListWidget from "../../components/courseEditor/widgets/ListWidgetComponent"
 import ImageWidget from "../../components/courseEditor/widgets/ImageWidgetComponent";
+import WidgetHeader from "../../components/courseEditor/WidgetHeaderComponent";
 import {connect} from "react-redux";
 import {
     createWidget,
@@ -48,7 +49,21 @@ class WidgetList extends React.Component {
                 </div>}
                 {
                 this.props.widgets.map(widget =>
-                        <div key={widget.id}>
+                        <div className="container-fluid border p-3" key={widget.id}>
+                            <WidgetHeader
+                                preview = {this.state.preview}
+                                widget = {widget}
+                                switchPosition={async (widget, moveUp) => {
+                                    await this.props.switchPosition(widget, moveUp)
+                                    this.setState({
+                                        widgets: this.props.widgets
+                                    })
+                                }}
+                                updateWidgetUI = {this.props.updateWidgetUI}
+                                deleteWidget={(widget) => {this.props.removeWidget(widget)
+                                    this.props.updateAllWidgets(this.props.widgets)}}
+                                widgets = {this.props.widgets}
+                            />
                             {widget.type === "HEADING" &&
                             <HeadingWidget
                                 widgets = {this.props.widgets}
@@ -58,7 +73,7 @@ class WidgetList extends React.Component {
                                         widgets: this.props.widgets
                                     })
                                 }}
-                                updateWidgetUI={ this.props.updateWidgetUI}
+                                updateWidgetUI={this.props.updateWidgetUI}
                                 deleteWidget={(widget) => {this.props.removeWidget(widget)
                                     this.props.updateAllWidgets(this.props.widgets)}}
                                 widget={widget}
