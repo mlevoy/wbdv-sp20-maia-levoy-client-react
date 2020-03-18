@@ -2,5 +2,5 @@ export const API_URL = "https://wbdv-generic-server.herokuapp.com/api/mlevoy/cou
 export const NONCOURSE_API = "https://wbdv-generic-server.herokuapp.com/api/mlevoy"
 // export const WIDGET_API = "http://localhost:8080/api/widgets/"
 // export const MY_SERVER_API ="http://localhost:8080/api/"
-export const WIDGET_API = "https://secret-castle-28198.herokuapp.com/widgets/"
+export const WIDGET_API = "https://secret-castle-28198.herokuapp.com/api/widgets/"
 export const MY_SERVER_API ="https://secret-castle-28198.herokuapp.com/api/"
